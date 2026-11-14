@@ -1,0 +1,80 @@
+---
+description: MARS EXPLORER — Persistent Project Rules for Cursor IDE
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.css"
+alwaysApply: true
+---
+
+# MARS EXPLORER — Project Rules
+
+## Project Identity
+- **Project**: MARS EXPLORER
+- **Event**: NASA Space Apps Challenge 2026
+- **Challenge**: Interplanetary Survival Guide: Martian Map
+- **Hackathon deadline**: Prioritize working, shippable code over perfect abstraction.
+
+## Technology Stack
+- React + Vite + TypeScript (strict)
+- Tailwind CSS v4 (`@tailwindcss/vite` plugin — no v3 patterns)
+- React Router DOM for navigation
+- Leaflet + React Leaflet for mapping
+- Pannellum for 360° panoramas (global script, not ES module)
+- lucide-react for icons
+- clsx + tailwind-merge for className composition
+
+## Code Architecture Rules
+- Keep **business logic** in `src/lib/` and `src/hooks/`, separate from UI components.
+- Keep **components modular** — one responsibility per component.
+- Keep **pages** in `src/pages/`, **reusable components** in `src/components/`.
+- Use **TypeScript interfaces** for all data shapes (`src/types/`).
+- Use **design tokens** (CSS variables in `globals.css`), never hardcode color values.
+- Prefer **named exports** over default exports for components.
+
+## Scientific Integrity Rules (CRITICAL)
+- **NEVER fabricate** NASA observations, coordinates, or scientific measurements.
+- **ALWAYS distinguish** between:
+  - Verified NASA data (`isVerified: true`)
+  - Placeholder records (`isVerified: false`, `dataSources: ['PLACEHOLDER']`)
+  - Simulated mission data (`isSimulated: true`)
+  - Integration-pending features (badge + `coming-soon` state)
+- **Preserve source attribution** — always include `sourceUrl` for real NASA data.
+- **Do not use Earth map tiles** as if they were Mars — label clearly as placeholder.
+- Mars uses **areocentric coordinates**: latitude (±90°), east longitude (0–360°).
+- Use `marsGreatCircleKm()` for distance, not Earth Haversine constants.
+
+## Design Rules
+- Interface style: **Premium Planetary Mission Control**
+- Always use **CSS variables** from `globals.css` for colors, never Tailwind color names.
+- Avoid excessive gradients, glowing effects, and animations.
+- Information-dense layout — no huge empty cards.
+- Support **loading, error, and empty states** in every data-displaying component.
+- Use `LoadingState` component for consistent state handling.
+
+## Component Rules
+- Handle all three states: **loading, error, empty**.
+- Don't show interactive UI elements that do nothing — use `disabled` + `Badge` "Coming Soon".
+- Use `Badge variant="warning"` to mark placeholder content.
+- Never overwrite a working component unless fixing a confirmed bug.
+
+## Development Rules
+- Application must **build successfully** (`npm run build`) throughout development.
+- Run `npx tsc --noEmit` to verify TypeScript after major changes.
+- **Do not introduce dependencies** without justification and compatibility check.
+- **No backend** during initialization — all data is local JSON.
+- **No API keys** hardcoded in source code — use `import.meta.env.VITE_*`.
+- Three.js: introduce only if justified for a specific 3D feature.
+- Supabase: introduce only if persistent cloud data is explicitly required.
+
+## Git Rules
+- Keep the application buildable at every commit.
+- Never commit `.env` files with real API keys.
+- Use descriptive commit messages.
+
+## Priority Order (Hackathon Context)
+1. Application runs and builds without errors.
+2. All routes load and navigate correctly.
+3. Core features (panorama viewer, map, mission planner) work functionally.
+4. Scientific data integrity maintained.
+5. Visual polish and additional features.

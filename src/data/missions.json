@@ -1,0 +1,50 @@
+[
+  {
+    "id": "msn-jezero-survey-001",
+    "title": "Jezero Delta Geological Survey",
+    "objective": "Conduct a systematic geological survey of the ancient river delta formation in Jezero Crater, documenting exposed sedimentary layers and collecting representative rock samples.",
+    "objectiveType": "geological_survey",
+    "status": "planning",
+    "priority": "high",
+    "start": { "lat": 18.4446, "lon": 77.4509, "label": "Perseverance Landing Site" },
+    "destination": { "lat": 18.4700, "lon": 77.5100, "label": "Delta Escarpment A" },
+    "waypoints": [],
+    "estimatedDurationHrs": 6,
+    "estimatedDistanceKm": 3.2,
+    "resources": {
+      "oxygenKg": 4.5,
+      "waterL": 6.0,
+      "foodRations": 2,
+      "powerKwh": 8.0,
+      "toolsManifest": ["Geological hammer", "Sample containers (×12)", "Portable spectrometer", "High-resolution camera"]
+    },
+    "plannedStart": "2026-03-15T08:00:00Z",
+    "crewSize": 2,
+    "notes": "SIMULATED MISSION — This is a hypothetical future human Mars mission exercise. All parameters are illustrative.",
+    "isSimulated": true
+  },
+  {
+    "id": "msn-olympus-approach-001",
+    "title": "Olympus Mons Approach Route Scout",
+    "objective": "Evaluate the feasibility of an approach route to the base of Olympus Mons through the northwest lava plains. Document terrain hazards and assess traversability.",
+    "objectiveType": "route_scouting",
+    "status": "planning",
+    "priority": "medium",
+    "start": { "lat": 17.2, "lon": 222.5, "label": "Northwest Base Camp" },
+    "destination": { "lat": 18.1, "lon": 224.8, "label": "Olympus Escarpment Approach" },
+    "waypoints": [],
+    "estimatedDurationHrs": 10,
+    "estimatedDistanceKm": 45.0,
+    "resources": {
+      "oxygenKg": 8.0,
+      "waterL": 10.0,
+      "foodRations": 4,
+      "powerKwh": 15.0,
+      "toolsManifest": ["Terrain mapping drone", "Emergency beacon", "Medical kit", "Pressurized rover"]
+    },
+    "plannedStart": "2026-04-10T06:00:00Z",
+    "crewSize": 3,
+    "notes": "SIMULATED MISSION — Long-range traversal exercise. Actual Olympus Mons terrain data sourced from HiRISE orbital imagery.",
+    "isSimulated": true
+  }
+]

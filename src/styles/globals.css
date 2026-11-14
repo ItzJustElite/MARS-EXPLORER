@@ -1,0 +1,261 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* =========================================================
+   MARS EXPLORER — Global Design System
+   Premium Planetary Mission Control Interface
+   NASA Space Apps Challenge 2026
+   ========================================================= */
+
+:root {
+  /* Color Tokens */
+  --color-bg-primary: #090B0E;
+  --color-bg-secondary: #101419;
+  --color-bg-panel: #151B21;
+  --color-bg-elevated: #1C242D;
+
+  --color-accent-primary: #D97742;
+  --color-accent-secondary: #B94F38;
+  --color-accent-dim: rgba(217, 119, 66, 0.15);
+  --color-accent-glow: rgba(217, 119, 66, 0.08);
+
+  --color-text-primary: #F1F1EE;
+  --color-text-secondary: #C4CAD1;
+  --color-text-muted: #929AA3;
+  --color-text-disabled: #4A5260;
+
+  --color-border: #252C33;
+  --color-border-subtle: #1D2329;
+  --color-border-accent: rgba(217, 119, 66, 0.3);
+
+  /* Status Colors */
+  --color-status-active: #4ADE80;
+  --color-status-warning: #FBBF24;
+  --color-status-error: #F87171;
+  --color-status-info: #60A5FA;
+
+  /* Spacing */
+  --sidebar-width: 240px;
+  --topbar-height: 56px;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+}
+
+/* =========================================================
+   Base Reset & Typography
+   ========================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   Scrollbar Styling
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-disabled);
+}
+
+/* =========================================================
+   Utility Classes
+   ========================================================= */
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Panel base */
+.panel {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Text utilities */
+.text-accent { color: var(--color-accent-primary); }
+.text-muted { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
+
+/* Accent line separator */
+.accent-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent-primary) 0%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* Status dot */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-status-active);
+  box-shadow: 0 0 6px var(--color-status-active);
+}
+
+.status-dot--warning {
+  background-color: var(--color-status-warning);
+  box-shadow: 0 0 6px var(--color-status-warning);
+}
+
+.status-dot--error {
+  background-color: var(--color-status-error);
+  box-shadow: 0 0 6px var(--color-status-error);
+}
+
+/* =========================================================
+   Leaflet Map Overrides
+   ========================================================= */
+
+.leaflet-container {
+  background: var(--color-bg-primary);
+  font-family: var(--font-body);
+}
+
+.leaflet-control-attribution {
+  background: rgba(9, 11, 14, 0.8) !important;
+  color: var(--color-text-muted) !important;
+  font-size: 10px;
+}
+
+.leaflet-control-zoom a {
+  background: var(--color-bg-panel) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-accent-primary) !important;
+}
+
+/* =========================================================
+   Pannellum Overrides
+   ========================================================= */
+
+.pnlm-container {
+  background: var(--color-bg-primary) !important;
+}
+
+.pnlm-load-box {
+  background: var(--color-bg-panel) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* =========================================================
+   Transitions
+   ========================================================= */
+
+.transition-fast { transition: all 0.1s ease; }
+.transition-base { transition: all 0.2s ease; }
+.transition-slow { transition: all 0.35s ease; }
+
+/* =========================================================
+   Mars-specific Design Elements
+   ========================================================= */
+
+.mars-grid {
+  background-image:
+    linear-gradient(rgba(37, 44, 51, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 44, 51, 0.4) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.scanning-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-primary), transparent);
+  opacity: 0.6;
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes pulse-accent {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-accent {
+  animation: pulse-accent 2s ease-in-out infinite;
+}
+
+/* =========================================================
+   Coming-Soon Overlay
+   ========================================================= */
+
+.coming-soon-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 11, 14, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  backdrop-filter: blur(2px);
+  z-index: 10;
+}
