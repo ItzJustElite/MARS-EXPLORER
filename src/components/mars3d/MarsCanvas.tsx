@@ -292,49 +292,51 @@ export function MarsCanvas({
       }
     )
 
-    // 10. Create 3D Interactive Pin Markers for the 20 POIs
+    // 10. Create 3D Clickable Circular Beacon Targets for the 20 POIs
     const markerMap = new Map<string, THREE.Group>()
 
     MARS_POIS.forEach((poi) => {
       const markerGroup = new THREE.Group()
-      const pos = latLonToVector3(poi.lat, poi.lon, MARS_RADIUS * 1.01)
+      const pos = latLonToVector3(poi.lat, poi.lon, MARS_RADIUS * 1.006)
       markerGroup.position.copy(pos)
 
       // Orient marker along surface normal
-      markerGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), pos.clone().normalize())
+      markerGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize())
 
-      // Pin stem
-      const stemGeom = new THREE.CylinderGeometry(0.015, 0.015, 0.18, 8)
-      stemGeom.translate(0, 0.09, 0)
-      const stemMat = new THREE.MeshBasicMaterial({ color: 0xffffff })
-      const stem = new THREE.Mesh(stemGeom, stemMat)
-      markerGroup.add(stem)
-
-      // Pin head sphere
-      const headGeom = new THREE.SphereGeometry(0.065, 16, 16)
-      headGeom.translate(0, 0.22, 0)
-      const headMat = new THREE.MeshStandardMaterial({
-        color: 0xff6b35,
-        emissive: 0xd9441a,
-        emissiveIntensity: 0.6,
-        roughness: 0.3,
-      })
-      const head = new THREE.Mesh(headGeom, headMat)
-      head.userData = { poiId: poi.id }
-      markerGroup.add(head)
-
-      // Pulsing beacon ring
-      const ringGeom = new THREE.RingGeometry(0.08, 0.13, 24)
-      ringGeom.rotateX(-Math.PI / 2)
-      ringGeom.translate(0, 0.01, 0)
+      // Clickable Outer Target Ring (Flush with Mars surface)
+      const ringGeom = new THREE.RingGeometry(0.06, 0.12, 32)
       const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xff7a3d,
+        color: 0xff6b35,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.9,
       })
       const ring = new THREE.Mesh(ringGeom, ringMat)
+      ring.userData = { poiId: poi.id }
       markerGroup.add(ring)
+
+      // Clickable Inner Glowing Core Dot
+      const dotGeom = new THREE.CircleGeometry(0.045, 24)
+      const dotMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        side: THREE.DoubleSide,
+      })
+      const dot = new THREE.Mesh(dotGeom, dotMat)
+      dot.position.z = 0.002
+      dot.userData = { poiId: poi.id }
+      markerGroup.add(dot)
+
+      // Pulsing Wave Ring
+      const pulseGeom = new THREE.RingGeometry(0.13, 0.165, 32)
+      const pulseMat = new THREE.MeshBasicMaterial({
+        color: 0xffa066,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.6,
+      })
+      const pulse = new THREE.Mesh(pulseGeom, pulseMat)
+      pulse.position.z = 0.001
+      markerGroup.add(pulse)
 
       marsGroup.add(markerGroup)
       markerMap.set(poi.id, markerGroup)
@@ -502,10 +504,11 @@ export function MarsCanvas({
     const raycaster = new THREE.Raycaster()
     raycaster.setFromCamera(mouse, cameraRef.current)
 
-    // Check intersections with all marker head spheres
+    // Check intersections with all clickable beacon target disks
     const interactiveObjects: THREE.Object3D[] = []
     markerMeshesRef.current.forEach((group) => {
-      interactiveObjects.push(group.children[1]) // the pin head sphere
+      interactiveObjects.push(group.children[0]) // target ring
+      interactiveObjects.push(group.children[1]) // target dot
     })
 
     const markerIntersects = raycaster.intersectObjects(interactiveObjects, false)

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { MarsCanvas } from '@/components/mars3d/MarsCanvas'
 import { QuickFactCard } from '@/components/ui/QuickFactCard'
 import { MainMenu } from '@/components/ui/MainMenu'
-import { SingleplayerGame } from '@/components/game/SingleplayerGame'
+import { GeoGuessrGame } from '@/components/game/GeoGuessrGame'
 import { SettingsModal } from '@/components/ui/SettingsModal'
 import { MultiplayerModal } from '@/components/ui/MultiplayerModal'
 import { MARS_POIS, type MarsPOI } from '@/data/marsPois'
@@ -18,7 +18,6 @@ export function App() {
   // Application view modes: 'menu' | 'singleplayer' | 'explore'
   const [currentMode, setCurrentMode] = useState<'menu' | 'singleplayer' | 'explore'>('menu')
   const [selectedPoi, setSelectedPoi] = useState<MarsPOI>(initialPoi)
-  const [screenPoint, setScreenPoint] = useState<{ x: number; y: number; isVisible: boolean } | null>(null)
 
   // Modals & Settings
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
@@ -26,11 +25,6 @@ export function App() {
   const [isMuted, setIsMuted] = useState(false)
   const [autoRotate, setAutoRotate] = useState(true)
   const [rotationSpeed, setRotationSpeed] = useState(0.3)
-
-  // Singleplayer game communication states with 3D canvas
-  const [gameGuessMode, setGameGuessMode] = useState(false)
-  const [playerGuessCoords, setPlayerGuessCoords] = useState<{ lat: number; lon: number } | null>(null)
-  const [revealedPoi, setRevealedPoi] = useState<MarsPOI | null>(null)
 
   // Audio start on first user interaction
   useEffect(() => {
@@ -55,121 +49,101 @@ export function App() {
     sound.playBeaconSelect()
   }
 
-  // Start singleplayer mode
+  // Start singleplayer GeoGuessr mode
   const handleStartSingleplayer = () => {
     sound.playClick()
     setCurrentMode('singleplayer')
-    setPlayerGuessCoords(null)
-    setRevealedPoi(null)
   }
 
   // Exit singleplayer back to main menu
   const handleExitGame = () => {
     sound.playClick()
     setCurrentMode('menu')
-    setGameGuessMode(false)
-    setPlayerGuessCoords(null)
-    setRevealedPoi(null)
   }
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#07090c] text-white">
-      {/* 3D WebGL Mars & Space Skybox Canvas */}
-      <MarsCanvas
-        selectedPoi={currentMode === 'singleplayer' ? (revealedPoi ?? null) : selectedPoi}
-        onSelectPoi={handleSelectPoi}
-        isInteractive={true}
-        autoRotate={autoRotate && currentMode === 'menu'}
-        rotationSpeed={rotationSpeed}
-        onScreenPointUpdate={setScreenPoint}
-        guessMode={gameGuessMode}
-        onPlayerGuess={(coords) => {
-          sound.playClick()
-          setPlayerGuessCoords(coords)
-        }}
-        playerGuessCoords={playerGuessCoords}
-        revealedPoi={revealedPoi}
-      />
-
-      {/* Main Menu State */}
-      {currentMode === 'menu' && (
+      {/* When in Singleplayer mode, the main globe goes away and we enter full 360 GeoGuessr! */}
+      {currentMode === 'singleplayer' ? (
+        <GeoGuessrGame onExitGame={handleExitGame} />
+      ) : (
         <>
-          {/* Main Menu Navigation Overlay */}
-          <MainMenu
-            onStartSingleplayer={handleStartSingleplayer}
-            onOpenMultiplayer={() => setIsMultiplayerOpen(true)}
-            onOpenSettings={() => setIsSettingsOpen(true)}
-            onToggleExplore={() => setCurrentMode('explore')}
-            isExploreMode={false}
+          {/* 3D WebGL Mars & Space Skybox Canvas (Main Menu / Explore) */}
+          <MarsCanvas
+            selectedPoi={selectedPoi}
+            onSelectPoi={handleSelectPoi}
+            isInteractive={true}
+            autoRotate={autoRotate && currentMode === 'menu'}
+            rotationSpeed={rotationSpeed}
+          />
+
+          {/* Main Menu State */}
+          {currentMode === 'menu' && (
+            <>
+              {/* Main Menu Navigation Overlay */}
+              <MainMenu
+                onStartSingleplayer={handleStartSingleplayer}
+                onOpenMultiplayer={() => setIsMultiplayerOpen(true)}
+                onOpenSettings={() => setIsSettingsOpen(true)}
+                onToggleExplore={() => setCurrentMode('explore')}
+                isExploreMode={false}
+                isMuted={isMuted}
+                onToggleMute={handleToggleMute}
+              />
+
+              {/* Quick Fact Card - FIXED & CONSTRAINED TO THE RIGHT */}
+              <QuickFactCard
+                poi={selectedPoi}
+                onSelectPoi={handleSelectPoi}
+                onStartSingleplayer={handleStartSingleplayer}
+              />
+            </>
+          )}
+
+          {/* Explore Free Roam Mode (Clean HUD with just Quick Fact Card and Exit button) */}
+          {currentMode === 'explore' && (
+            <>
+              <div className="absolute top-8 left-8 z-30 pointer-events-auto">
+                <button
+                  onClick={() => {
+                    sound.playClick()
+                    setCurrentMode('menu')
+                  }}
+                  className="px-5 py-3 rounded-2xl bg-[#10141a]/90 hover:bg-[#10141a] text-white text-xs font-heading font-semibold border border-white/20 backdrop-blur-xl shadow-2xl transition-all"
+                >
+                  &larr; Back to Main Menu
+                </button>
+              </div>
+
+              {/* Quick Fact Card - Fixed to the Right */}
+              <QuickFactCard
+                poi={selectedPoi}
+                onSelectPoi={handleSelectPoi}
+                onStartSingleplayer={handleStartSingleplayer}
+              />
+            </>
+          )}
+
+          {/* Settings Modal (Spacious & Clean) */}
+          <SettingsModal
+            isOpen={isSettingsOpen}
+            onClose={() => setIsSettingsOpen(false)}
             isMuted={isMuted}
             onToggleMute={handleToggleMute}
+            autoRotate={autoRotate}
+            onToggleAutoRotate={() => setAutoRotate(!autoRotate)}
+            rotationSpeed={rotationSpeed}
+            onChangeRotationSpeed={setRotationSpeed}
           />
 
-          {/* Quick Fact Card with SVG line pointing to the selected POI */}
-          <QuickFactCard
-            poi={selectedPoi}
-            screenPoint={screenPoint}
-            onSelectPoi={handleSelectPoi}
-            onStartQuizWithPoi={handleStartSingleplayer}
-          />
-        </>
-      )}
-
-      {/* Explore Free Roam Mode (Clean HUD with just Quick Fact Card and Exit button) */}
-      {currentMode === 'explore' && (
-        <>
-          <div className="absolute top-6 left-6 z-30 pointer-events-auto">
-            <button
-              onClick={() => {
-                sound.playClick()
-                setCurrentMode('menu')
-              }}
-              className="px-4 py-2 rounded-xl bg-[#10141a]/90 hover:bg-[#10141a] text-white text-xs font-heading font-semibold border border-white/20 backdrop-blur-md shadow-xl transition-all"
-            >
-              &larr; Back to Main Menu
-            </button>
-          </div>
-
-          <QuickFactCard
-            poi={selectedPoi}
-            screenPoint={screenPoint}
-            onSelectPoi={handleSelectPoi}
-            onStartQuizWithPoi={handleStartSingleplayer}
+          {/* Multiplayer Preview Modal (Spacious & Clean) */}
+          <MultiplayerModal
+            isOpen={isMultiplayerOpen}
+            onClose={() => setIsMultiplayerOpen(false)}
+            onTrySingleplayer={handleStartSingleplayer}
           />
         </>
       )}
-
-      {/* Singleplayer Game Loop Overlay */}
-      {currentMode === 'singleplayer' && (
-        <SingleplayerGame
-          onExitGame={handleExitGame}
-          onSetGameGuessMode={setGameGuessMode}
-          playerGuessCoords={playerGuessCoords}
-          onSetRevealedPoi={setRevealedPoi}
-          onSetTargetPoiForCamera={(poi) => {
-            if (poi) handleSelectPoi(poi)
-          }}
-        />
-      )}
-
-      {/* Settings Modal */}
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        isMuted={isMuted}
-        onToggleMute={handleToggleMute}
-        autoRotate={autoRotate}
-        onToggleAutoRotate={() => setAutoRotate(!autoRotate)}
-        rotationSpeed={rotationSpeed}
-        onChangeRotationSpeed={setRotationSpeed}
-      />
-
-      {/* Multiplayer Preview Modal */}
-      <MultiplayerModal
-        isOpen={isMultiplayerOpen}
-        onClose={() => setIsMultiplayerOpen(false)}
-        onTrySingleplayer={handleStartSingleplayer}
-      />
     </div>
   )
 }

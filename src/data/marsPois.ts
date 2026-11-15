@@ -7,42 +7,12 @@ export interface MarsPOI {
   lon: number // Longitude in degrees: -180 to +180
   highlightStat: string
   quickFact: string
-  clues: [string, string, string] // For the singleplayer guessing game
+  clues: [string, string, string] // Progressive clues
+  panoramaUrl: string // Path to 360 equirectangular panorama
+  pdsKeywords: string // Keywords to query the live NASA PDS API
 }
 
 export const MARS_POIS: MarsPOI[] = [
-  {
-    id: 'olympus-mons',
-    name: 'Olympus Mons',
-    category: 'volcano',
-    categoryLabel: 'Colossal Volcano',
-    lat: 18.65,
-    lon: -133.8,
-    highlightStat: 'Nearly 3x taller than Mt. Everest (21.9 km high)',
-    quickFact:
-      'The biggest volcano in our entire Solar System. It is so enormous that its base covers an area the size of Arizona, and its gentle slopes mean an astronaut walking up it would hardly notice the climb!',
-    clues: [
-      'I am the tallest mountain and volcano in the entire Solar System.',
-      'My base is so wide that it could cover the entire state of Arizona or the country of France.',
-      'I rise nearly 22 kilometers into the thin Martian sky, dwarfing Mount Everest.',
-    ],
-  },
-  {
-    id: 'valles-marineris',
-    name: 'Valles Marineris',
-    category: 'canyon',
-    categoryLabel: 'Grand Canyon of Mars',
-    lat: -13.9,
-    lon: -59.2,
-    highlightStat: 'Over 4,000 km long & 4x deeper than the Grand Canyon',
-    quickFact:
-      'A colossal rift valley that stretches across a fifth of the entire planet. If it were on Earth, it would span all the way from New York to Los Angeles!',
-    clues: [
-      'I am a mega-canyon system that cuts horizontally across Mars like a giant scar.',
-      'I am 4 times deeper and 10 times longer than Earth’s Grand Canyon.',
-      'If you placed me on the United States, I would stretch coast to coast.',
-    ],
-  },
   {
     id: 'jezero-crater',
     name: 'Jezero Crater',
@@ -58,6 +28,8 @@ export const MARS_POIS: MarsPOI[] = [
       'NASA landed the Perseverance rover and the Ingenuity helicopter here in 2021.',
       'My muddy delta rocks are the prime location for finding fossilized Martian microbes.',
     ],
+    panoramaUrl: '/panoramas/jezero.png',
+    pdsKeywords: 'perseverance jezero mastcam',
   },
   {
     id: 'gale-crater',
@@ -74,102 +46,44 @@ export const MARS_POIS: MarsPOI[] = [
       'The nuclear-powered Curiosity rover touched down here using a sky crane in 2012.',
       'Mount Sharp at my center contains clay and sulfate layers from ancient wet climates.',
     ],
+    panoramaUrl: '/panoramas/gale.png',
+    pdsKeywords: 'curiosity gale mastcam',
   },
   {
-    id: 'hellas-planitia',
-    name: 'Hellas Basin',
-    category: 'crater',
-    categoryLabel: 'Giant Impact Basin',
-    lat: -42.7,
-    lon: 70.0,
-    highlightStat: '2,300 km wide & 7 km deep crater',
-    quickFact:
-      'Created when a rogue asteroid slammed into Mars 4 billion years ago. It is so deep that the air pressure at the bottom is twice the planetary average—sometimes allowing temporary morning ground fog to form.',
-    clues: [
-      'I am one of the largest asteroid impact scars in the entire Solar System.',
-      'I am located in the southern hemisphere and measure over 2,300 kilometers wide.',
-      'My floor is so deep that atmospheric pressure here is high enough to trap morning mist.',
-    ],
-  },
-  {
-    id: 'tharsis-montes',
-    name: 'Tharsis Montes',
+    id: 'olympus-mons',
+    name: 'Olympus Mons',
     category: 'volcano',
-    categoryLabel: 'Trio of Giant Volcanoes',
-    lat: 1.5,
-    lon: -113.0,
-    highlightStat: 'Three giant volcanoes in a perfect line',
+    categoryLabel: 'Colossal Volcano',
+    lat: 18.65,
+    lon: -133.8,
+    highlightStat: 'Nearly 3x taller than Mt. Everest (21.9 km high)',
     quickFact:
-      'Three colossal shield volcanoes—Ascraeus, Pavonis, and Arsia—spaced roughly 700 kilometers apart in a neat diagonal line across the Martian equator on a massive volcanic bulge.',
+      'The biggest volcano in our entire Solar System. It is so enormous that its base covers an area the size of Arizona, and its gentle slopes mean an astronaut walking up it would hardly notice the climb!',
     clues: [
-      'We are three massive sister volcanoes standing in a neat diagonal row.',
-      'Our summits poke high through the dust storms on the Tharsis volcanic bulge.',
-      'Our names are Ascraeus Mons, Pavonis Mons, and Arsia Mons.',
+      'I am the tallest mountain and volcano in the entire Solar System.',
+      'My base is so wide that it could cover the entire state of Arizona or the country of France.',
+      'I rise nearly 22 kilometers into the thin Martian sky, dwarfing Mount Everest.',
     ],
+    panoramaUrl: '/panoramas/olympus.png',
+    pdsKeywords: 'olympus mons mola',
   },
   {
-    id: 'meridiani-planum',
-    name: 'Meridiani Planum',
-    category: 'rover_site',
-    categoryLabel: 'The Blueberry Plains',
-    lat: -0.2,
-    lon: -2.5,
-    highlightStat: 'Where Martian "blueberries" were found',
+    id: 'valles-marineris',
+    name: 'Valles Marineris',
+    category: 'canyon',
+    categoryLabel: 'Grand Canyon of Mars',
+    lat: -13.9,
+    lon: -59.2,
+    highlightStat: 'Over 4,000 km long & 4x deeper than the Grand Canyon',
     quickFact:
-      'The landing site of the Opportunity rover. Here, Opportunity found thousands of tiny gray hematite spheres nicknamed "blueberries" that proved acidic groundwater once flowed across the plains.',
+      'A colossal rift valley that stretches across a fifth of the entire planet. If it were on Earth, it would span all the way from New York to Los Angeles!',
     clues: [
-      'I sit right on the Martian prime meridian and equator.',
-      'The Opportunity rover rolled across my plains and discovered tiny round hematite spheres.',
-      'My mineral-rich rocks proved that acidic liquid water soaked the ground in the distant past.',
+      'I am a mega-canyon system that cuts horizontally across Mars like a giant scar.',
+      'I am 4 times deeper and 10 times longer than Earth’s Grand Canyon.',
+      'If you placed me on the United States, I would stretch coast to coast.',
     ],
-  },
-  {
-    id: 'gusev-crater',
-    name: 'Gusev Crater',
-    category: 'rover_site',
-    categoryLabel: 'Spirit Rover Discovery Site',
-    lat: -14.57,
-    lon: 175.47,
-    highlightStat: 'Site of ancient hydrothermal hot springs',
-    quickFact:
-      'The landing site of NASA’s twin rover Spirit. While navigating the Columbia Hills inside this crater, Spirit’s jammed wheel churned up pure silica soil—the unmistakable fingerprint of ancient hot springs!',
-    clues: [
-      'I am a crater the size of Connecticut that was carved out by an ancient river channel.',
-      'NASA’s Spirit rover explored my floor and climbed the Columbia Hills.',
-      'A stuck rover wheel here accidentally dug up bright white silica left by ancient hot springs.',
-    ],
-  },
-  {
-    id: 'utopia-planitia',
-    name: 'Utopia Planitia',
-    category: 'feature',
-    categoryLabel: 'Vast Northern Plains',
-    lat: 46.7,
-    lon: 117.5,
-    highlightStat: 'Holds as much underground ice as Lake Superior',
-    quickFact:
-      'A sprawling northern plain where China’s Zhurong rover landed in 2021. Satellite radar reveals a massive buried ice sheet beneath its soil holding enough fresh water to fill Lake Superior.',
-    clues: [
-      'I am an enormous smooth plain in the northern lowlands of Mars.',
-      'NASA’s Viking 2 lander visited me in 1976, and China’s Zhurong rover landed here in 2021.',
-      'Radar sounders discovered an underground ice sheet under my plains containing huge amounts of water.',
-    ],
-  },
-  {
-    id: 'elysium-planitia',
-    name: 'Elysium Planitia',
-    category: 'rover_site',
-    categoryLabel: 'Marsquake Central',
-    lat: 4.5,
-    lon: 135.9,
-    highlightStat: 'Where InSight listened to over 1,300 Marsquakes',
-    quickFact:
-      'A flat, smooth volcanic plain nicknamed "the parking lot of Mars". NASA’s InSight robotic lander put its ear to the ground here for four years, recording hundreds of rumbling quakes and mapping Mars’ molten core.',
-    clues: [
-      'I am a remarkably flat volcanic plain near the Martian equator.',
-      'The robotic InSight lander placed an ultra-sensitive dome seismometer on my red soil.',
-      'Scientists listened to over 1,300 "Marsquakes" here to map the planet’s liquid core.',
-    ],
+    panoramaUrl: '/panoramas/valles.png',
+    pdsKeywords: 'valles marineris hirise',
   },
   {
     id: 'planum-boreum',
@@ -186,6 +100,116 @@ export const MARS_POIS: MarsPOI[] = [
       'My water ice sheets are carved into stunning spiral pinwheel canyons by polar winds.',
       'During the dark winter, freezing carbon dioxide covers me in a blanket of dry ice.',
     ],
+    panoramaUrl: '/panoramas/boreum.png',
+    pdsKeywords: 'planum boreum sharad',
+  },
+  {
+    id: 'hellas-planitia',
+    name: 'Hellas Basin',
+    category: 'crater',
+    categoryLabel: 'Giant Impact Basin',
+    lat: -42.7,
+    lon: 70.0,
+    highlightStat: '2,300 km wide & 7 km deep crater',
+    quickFact:
+      'Created when a rogue asteroid slammed into Mars 4 billion years ago. It is so deep that the air pressure at the bottom is twice the planetary average—sometimes allowing temporary morning ground fog to form.',
+    clues: [
+      'I am one of the largest asteroid impact scars in the entire Solar System.',
+      'I am located in the southern hemisphere and measure over 2,300 kilometers wide.',
+      'My floor is so deep that atmospheric pressure here is high enough to trap morning mist.',
+    ],
+    panoramaUrl: '/panoramas/jezero.png',
+    pdsKeywords: 'hellas planitia mola',
+  },
+  {
+    id: 'tharsis-montes',
+    name: 'Tharsis Montes',
+    category: 'volcano',
+    categoryLabel: 'Trio of Giant Volcanoes',
+    lat: 1.5,
+    lon: -113.0,
+    highlightStat: 'Three giant volcanoes in a perfect line',
+    quickFact:
+      'Three colossal shield volcanoes—Ascraeus, Pavonis, and Arsia—spaced roughly 700 kilometers apart in a neat diagonal line across the Martian equator on a massive volcanic bulge.',
+    clues: [
+      'We are three massive sister volcanoes standing in a neat diagonal row.',
+      'Our summits poke high through the dust storms on the Tharsis volcanic bulge.',
+      'Our names are Ascraeus Mons, Pavonis Mons, and Arsia Mons.',
+    ],
+    panoramaUrl: '/panoramas/olympus.png',
+    pdsKeywords: 'tharsis montes themis',
+  },
+  {
+    id: 'meridiani-planum',
+    name: 'Meridiani Planum',
+    category: 'rover_site',
+    categoryLabel: 'The Blueberry Plains',
+    lat: -0.2,
+    lon: -2.5,
+    highlightStat: 'Where Martian "blueberries" were found',
+    quickFact:
+      'The landing site of the Opportunity rover. Here, Opportunity found thousands of tiny gray hematite spheres nicknamed "blueberries" that proved acidic groundwater once flowed across the plains.',
+    clues: [
+      'I sit right on the Martian prime meridian and equator.',
+      'The Opportunity rover rolled across my plains and discovered tiny round hematite spheres.',
+      'My mineral-rich rocks proved that acidic liquid water soaked the ground in the distant past.',
+    ],
+    panoramaUrl: '/panoramas/gale.png',
+    pdsKeywords: 'opportunity meridiani pancam',
+  },
+  {
+    id: 'gusev-crater',
+    name: 'Gusev Crater',
+    category: 'rover_site',
+    categoryLabel: 'Spirit Rover Discovery Site',
+    lat: -14.57,
+    lon: 175.47,
+    highlightStat: 'Site of ancient hydrothermal hot springs',
+    quickFact:
+      'The landing site of NASA’s twin rover Spirit. While navigating the Columbia Hills inside this crater, Spirit’s jammed wheel churned up pure silica soil—the unmistakable fingerprint of ancient hot springs!',
+    clues: [
+      'I am a crater the size of Connecticut that was carved out by an ancient river channel.',
+      'NASA’s Spirit rover explored my floor and climbed the Columbia Hills.',
+      'A stuck rover wheel here accidentally dug up bright white silica left by ancient hot springs.',
+    ],
+    panoramaUrl: '/panoramas/jezero.png',
+    pdsKeywords: 'spirit gusev pancam',
+  },
+  {
+    id: 'utopia-planitia',
+    name: 'Utopia Planitia',
+    category: 'feature',
+    categoryLabel: 'Vast Northern Plains',
+    lat: 46.7,
+    lon: 117.5,
+    highlightStat: 'Holds as much underground ice as Lake Superior',
+    quickFact:
+      'A sprawling northern plain where China’s Zhurong rover landed in 2021. Satellite radar reveals a massive buried ice sheet beneath its soil holding enough fresh water to fill Lake Superior.',
+    clues: [
+      'I am an enormous smooth plain in the northern lowlands of Mars.',
+      'NASA’s Viking 2 lander visited me in 1976, and China’s Zhurong rover landed here in 2021.',
+      'Radar sounders discovered an underground ice sheet under my plains containing huge amounts of water.',
+    ],
+    panoramaUrl: '/panoramas/boreum.png',
+    pdsKeywords: 'utopia planitia sharad',
+  },
+  {
+    id: 'elysium-planitia',
+    name: 'Elysium Planitia',
+    category: 'rover_site',
+    categoryLabel: 'Marsquake Central',
+    lat: 4.5,
+    lon: 135.9,
+    highlightStat: 'Where InSight listened to over 1,300 Marsquakes',
+    quickFact:
+      'A flat, smooth volcanic plain nicknamed "the parking lot of Mars". NASA’s InSight robotic lander put its ear to the ground here for four years, recording hundreds of rumbling quakes and mapping Mars’ molten core.',
+    clues: [
+      'I am a remarkably flat volcanic plain near the Martian equator.',
+      'The robotic InSight lander placed an ultra-sensitive dome seismometer on my red soil.',
+      'Scientists listened to over 1,300 "Marsquakes" here to map the planet’s liquid core.',
+    ],
+    panoramaUrl: '/panoramas/gale.png',
+    pdsKeywords: 'insight elysium seis',
   },
   {
     id: 'planum-australe',
@@ -202,6 +226,8 @@ export const MARS_POIS: MarsPOI[] = [
       'My surface is composed of permanent dry ice that never fully melts in summer.',
       'Spring sunlight causes explosive carbon dioxide geysers to erupt through my frozen crust.',
     ],
+    panoramaUrl: '/panoramas/boreum.png',
+    pdsKeywords: 'planum australe crism',
   },
   {
     id: 'noctis-labyrinthus',
@@ -218,6 +244,8 @@ export const MARS_POIS: MarsPOI[] = [
       'I look like a chaotic fractured spiderweb of intersecting canyons and valleys.',
       'I connect the giant Tharsis volcanic plateau with the western mouth of Valles Marineris.',
     ],
+    panoramaUrl: '/panoramas/valles.png',
+    pdsKeywords: 'noctis labyrinthus hirise',
   },
   {
     id: 'cydonia',
@@ -234,6 +262,8 @@ export const MARS_POIS: MarsPOI[] = [
       'Tricky sunlight shadows made a natural rocky hill look like a giant human face.',
       'I sit along the boundary where southern highlands meet smooth northern plains.',
     ],
+    panoramaUrl: '/panoramas/jezero.png',
+    pdsKeywords: 'cydonia viking mro',
   },
   {
     id: 'ares-vallis',
@@ -250,6 +280,8 @@ export const MARS_POIS: MarsPOI[] = [
       'On July 4, 1997, NASA’s Mars Pathfinder landed here using giant bouncing airbags.',
       'The microwave-sized Sojourner—humanity’s first wheeled rover on Mars—rolled here.',
     ],
+    panoramaUrl: '/panoramas/jezero.png',
+    pdsKeywords: 'pathfinder ares vallis imp',
   },
   {
     id: 'argyre-planitia',
@@ -266,6 +298,8 @@ export const MARS_POIS: MarsPOI[] = [
       'My name comes from a mythical island of silver in ancient Greek folklore.',
       'During the southern winter, thick white frosts often coat my rim and floor.',
     ],
+    panoramaUrl: '/panoramas/boreum.png',
+    pdsKeywords: 'argyre basin hrsc',
   },
   {
     id: 'alba-mons',
@@ -282,6 +316,8 @@ export const MARS_POIS: MarsPOI[] = [
       'I span over 1,600 kilometers across, making me wider than the entire state of Alaska.',
       'I sit isolated in the northern plains just north of the Tharsis volcanic region.',
     ],
+    panoramaUrl: '/panoramas/olympus.png',
+    pdsKeywords: 'alba mons mola',
   },
   {
     id: 'medusae-fossae',
@@ -298,6 +334,8 @@ export const MARS_POIS: MarsPOI[] = [
       'I am composed of powdery volcanic ash and dust deposited billions of years ago.',
       'Radar data suggests miles of porous deposits here might be packed with frozen ice.',
     ],
+    panoramaUrl: '/panoramas/gale.png',
+    pdsKeywords: 'medusae fossae sharad',
   },
   {
     id: 'kasei-valles',
@@ -314,6 +352,8 @@ export const MARS_POIS: MarsPOI[] = [
       'Prehistoric floods that roared through me were over 100 times larger than the Amazon River.',
       'I empty northward into the vast Chryse Planitia basin.',
     ],
+    panoramaUrl: '/panoramas/valles.png',
+    pdsKeywords: 'kasei valles mro',
   },
   {
     id: 'victoria-crater',
@@ -330,5 +370,7 @@ export const MARS_POIS: MarsPOI[] = [
       'The Opportunity rover spent 22 continuous months carefully circumnavigating my rim.',
       'Names like "Cape Verde" and "Duck Bay" were given to my dramatic cliff promontories.',
     ],
+    panoramaUrl: '/panoramas/gale.png',
+    pdsKeywords: 'opportunity victoria pancam',
   },
 ]
