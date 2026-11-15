@@ -8,8 +8,9 @@ export interface MarsPOI {
   highlightStat: string
   quickFact: string
   clues: [string, string, string] // Progressive clues
-  panoramaUrl: string // Path to 360 equirectangular panorama
+  panoramaUrl: string // Legacy fallback; official NASA imagery resolves via getNasaPanorama()
   pdsKeywords: string // Keywords to query the live NASA PDS API
+  sourceUrl?: string // Official NASA source page for the card imagery
 }
 
 export const MARS_POIS: MarsPOI[] = [
@@ -17,12 +18,12 @@ export const MARS_POIS: MarsPOI[] = [
     id: 'jezero-crater',
     name: 'Jezero Crater',
     category: 'rover_site',
-    categoryLabel: 'Ancient River Delta',
+    categoryLabel: 'Rover Landing Site',
     lat: 18.38,
     lon: 77.58,
-    highlightStat: 'Landing site of the Perseverance Rover & Ingenuity',
+    highlightStat: 'Landing site of the Perseverance rover and Ingenuity helicopter (February 2021)',
     quickFact:
-      'Billions of years ago, this 45-km-wide crater was flooded with water and fed by a rushing river delta. Today, NASA’s Perseverance rover is collecting rock core samples here to search for fossils of ancient alien microbes.',
+      'Jezero is a 45 km-wide impact crater that once held a lake fed by a river delta. Perseverance is collecting rock cores here to search for evidence of past microbial life.',
     clues: [
       'I used to be a giant lake fed by an ancient river system billions of years ago.',
       'NASA landed the Perseverance rover and the Ingenuity helicopter here in 2021.',
@@ -30,17 +31,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/jezero.png',
     pdsKeywords: 'perseverance jezero mastcam',
+    sourceUrl: 'https://images.nasa.gov/details-PIA26369',
   },
   {
     id: 'gale-crater',
     name: 'Gale Crater',
     category: 'crater',
-    categoryLabel: 'Ancient Lake Basin',
+    categoryLabel: 'Rover Landing Site',
     lat: -5.37,
     lon: 137.44,
-    highlightStat: 'Home of the Curiosity Rover since 2012',
+    highlightStat: 'Curiosity rover landing site (August 2012)',
     quickFact:
-      'In the center of this huge impact basin sits Mount Sharp, a mountain of layered mud and sediment rising 5.5 kilometers high that preserves millions of years of Martian climate history.',
+      'Gale is a 154 km-wide impact crater containing Mount Sharp (Aeolis Mons), a 5.5 km layered mountain of sedimentary rock that records billions of years of Martian climate history.',
     clues: [
       'A 154-km impact crater with a massive 5.5-km mountain rising right in its center.',
       'The nuclear-powered Curiosity rover touched down here using a sky crane in 2012.',
@@ -48,17 +50,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/gale.png',
     pdsKeywords: 'curiosity gale mastcam',
+    sourceUrl: 'https://images.nasa.gov/details-PIA25407',
   },
   {
     id: 'olympus-mons',
     name: 'Olympus Mons',
     category: 'volcano',
-    categoryLabel: 'Colossal Volcano',
+    categoryLabel: 'Volcano',
     lat: 18.65,
     lon: -133.8,
-    highlightStat: 'Nearly 3x taller than Mt. Everest (21.9 km high)',
+    highlightStat: 'Largest known volcano in the Solar System (21.9 km high, ~600 km across)',
     quickFact:
-      'The biggest volcano in our entire Solar System. It is so enormous that its base covers an area the size of Arizona, and its gentle slopes mean an astronaut walking up it would hardly notice the climb!',
+      'Olympus Mons is a shield volcano in the Tharsis region, about 21.9 km high and roughly 600 km across at the base; its average slope is only about 5 degrees.',
     clues: [
       'I am the tallest mountain and volcano in the entire Solar System.',
       'My base is so wide that it could cover the entire state of Arizona or the country of France.',
@@ -66,17 +69,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/olympus.png',
     pdsKeywords: 'olympus mons mola',
+    sourceUrl: 'https://images.nasa.gov/details-PIA02982',
   },
   {
     id: 'valles-marineris',
     name: 'Valles Marineris',
     category: 'canyon',
-    categoryLabel: 'Grand Canyon of Mars',
+    categoryLabel: 'Canyon System',
     lat: -13.9,
     lon: -59.2,
-    highlightStat: 'Over 4,000 km long & 4x deeper than the Grand Canyon',
+    highlightStat: 'Canyon system over 4,000 km long and up to 7 km deep',
     quickFact:
-      'A colossal rift valley that stretches across a fifth of the entire planet. If it were on Earth, it would span all the way from New York to Los Angeles!',
+      'Valles Marineris is a vast rift valley system stretching roughly 4,000 km along the equator, up to 200 km wide and 7 km deep — far larger than Earth’s Grand Canyon.',
     clues: [
       'I am a mega-canyon system that cuts horizontally across Mars like a giant scar.',
       'I am 4 times deeper and 10 times longer than Earth’s Grand Canyon.',
@@ -84,17 +88,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/valles.png',
     pdsKeywords: 'valles marineris hirise',
+    sourceUrl: 'https://images.nasa.gov/details-PIA06926',
   },
   {
     id: 'planum-boreum',
     name: 'Planum Boreum (North Pole)',
     category: 'ice_cap',
-    categoryLabel: 'Northern Ice Cap',
+    categoryLabel: 'Polar Region',
     lat: 85.0,
     lon: 0.0,
-    highlightStat: '1,000 km wide spiral cap of pure water ice',
+    highlightStat: 'Northern polar plateau, ~1,000 km across',
     quickFact:
-      'Mars’ brilliant northern crown, made mostly of thick water ice carved by howling winds into mesmerizing spiral canyons. In winter, freezing carbon dioxide coats the cap in glistening dry ice snow.',
+      'Planum Boreum is Mars’ north polar plateau, capped by layered water ice and seasonal carbon-dioxide frost, with spiral troughs carved by wind.',
     clues: [
       'I am located at the very top of the planet, gleaming white against the red desert.',
       'My water ice sheets are carved into stunning spiral pinwheel canyons by polar winds.',
@@ -102,17 +107,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/boreum.png',
     pdsKeywords: 'planum boreum sharad',
+    sourceUrl: 'https://images.nasa.gov/details-PIA02800',
   },
   {
     id: 'hellas-planitia',
     name: 'Hellas Basin',
     category: 'crater',
-    categoryLabel: 'Giant Impact Basin',
+    categoryLabel: 'Impact Basin',
     lat: -42.7,
     lon: 70.0,
-    highlightStat: '2,300 km wide & 7 km deep crater',
+    highlightStat: 'Largest impact basin on Mars (2,300 km wide, ~7 km deep)',
     quickFact:
-      'Created when a rogue asteroid slammed into Mars 4 billion years ago. It is so deep that the air pressure at the bottom is twice the planetary average—sometimes allowing temporary morning ground fog to form.',
+      'Hellas Planitia is a 2,300 km-wide impact basin in the southern hemisphere, roughly 7 km deep; its floor has the highest surface pressure on Mars.',
     clues: [
       'I am one of the largest asteroid impact scars in the entire Solar System.',
       'I am located in the southern hemisphere and measure over 2,300 kilometers wide.',
@@ -120,17 +126,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/jezero.png',
     pdsKeywords: 'hellas planitia mola',
+    sourceUrl: 'https://images.nasa.gov/details-PIA14431',
   },
   {
     id: 'tharsis-montes',
     name: 'Tharsis Montes',
     category: 'volcano',
-    categoryLabel: 'Trio of Giant Volcanoes',
+    categoryLabel: 'Volcanic Province',
     lat: 1.5,
     lon: -113.0,
-    highlightStat: 'Three giant volcanoes in a perfect line',
+    highlightStat: 'Three aligned shield volcanoes on the Tharsis bulge',
     quickFact:
-      'Three colossal shield volcanoes—Ascraeus, Pavonis, and Arsia—spaced roughly 700 kilometers apart in a neat diagonal line across the Martian equator on a massive volcanic bulge.',
+      'The Tharsis Montes — Ascraeus, Pavonis, and Arsia — are three large shield volcanoes spaced about 700 km apart along the Tharsis bulge near the equator.',
     clues: [
       'We are three massive sister volcanoes standing in a neat diagonal row.',
       'Our summits poke high through the dust storms on the Tharsis volcanic bulge.',
@@ -138,17 +145,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/olympus.png',
     pdsKeywords: 'tharsis montes themis',
+    sourceUrl: 'https://images.nasa.gov/details-PIA00408',
   },
   {
     id: 'meridiani-planum',
     name: 'Meridiani Planum',
     category: 'rover_site',
-    categoryLabel: 'The Blueberry Plains',
+    categoryLabel: 'Rover Landing Site',
     lat: -0.2,
     lon: -2.5,
-    highlightStat: 'Where Martian "blueberries" were found',
+    highlightStat: 'Opportunity rover landing site (January 2004)',
     quickFact:
-      'The landing site of the Opportunity rover. Here, Opportunity found thousands of tiny gray hematite spheres nicknamed "blueberries" that proved acidic groundwater once flowed across the plains.',
+      'Meridiani Planum is a flat plain near the equator and prime meridian where Opportunity found hematite “blueberries,” evidence of past acidic water.',
     clues: [
       'I sit right on the Martian prime meridian and equator.',
       'The Opportunity rover rolled across my plains and discovered tiny round hematite spheres.',
@@ -156,17 +164,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/gale.png',
     pdsKeywords: 'opportunity meridiani pancam',
+    sourceUrl: 'https://images.nasa.gov/details-PIA07216',
   },
   {
     id: 'gusev-crater',
     name: 'Gusev Crater',
     category: 'rover_site',
-    categoryLabel: 'Spirit Rover Discovery Site',
+    categoryLabel: 'Rover Landing Site',
     lat: -14.57,
     lon: 175.47,
-    highlightStat: 'Site of ancient hydrothermal hot springs',
+    highlightStat: 'Spirit rover landing site (January 2004)',
     quickFact:
-      'The landing site of NASA’s twin rover Spirit. While navigating the Columbia Hills inside this crater, Spirit’s jammed wheel churned up pure silica soil—the unmistakable fingerprint of ancient hot springs!',
+      'Gusev is a 166 km-wide crater. Spirit explored the Columbia Hills and found silica deposits consistent with ancient hydrothermal activity.',
     clues: [
       'I am a crater the size of Connecticut that was carved out by an ancient river channel.',
       'NASA’s Spirit rover explored my floor and climbed the Columbia Hills.',
@@ -174,17 +183,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/jezero.png',
     pdsKeywords: 'spirit gusev pancam',
+    sourceUrl: 'https://images.nasa.gov/details-PIA11746',
   },
   {
     id: 'utopia-planitia',
     name: 'Utopia Planitia',
     category: 'feature',
-    categoryLabel: 'Vast Northern Plains',
+    categoryLabel: 'Northern Plains',
     lat: 46.7,
     lon: 117.5,
-    highlightStat: 'Holds as much underground ice as Lake Superior',
+    highlightStat: 'Landing site of Viking 2 (1976) and Zhurong (2021)',
     quickFact:
-      'A sprawling northern plain where China’s Zhurong rover landed in 2021. Satellite radar reveals a massive buried ice sheet beneath its soil holding enough fresh water to fill Lake Superior.',
+      'Utopia Planitia is a large northern plain. Radar data indicate a substantial subsurface water-ice deposit; Viking 2 and China’s Zhurong rover landed here.',
     clues: [
       'I am an enormous smooth plain in the northern lowlands of Mars.',
       'NASA’s Viking 2 lander visited me in 1976, and China’s Zhurong rover landed here in 2021.',
@@ -192,17 +202,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/boreum.png',
     pdsKeywords: 'utopia planitia sharad',
+    sourceUrl: 'https://images.nasa.gov/details-PIA13485',
   },
   {
     id: 'elysium-planitia',
     name: 'Elysium Planitia',
     category: 'rover_site',
-    categoryLabel: 'Marsquake Central',
+    categoryLabel: 'Rover Landing Site',
     lat: 4.5,
     lon: 135.9,
-    highlightStat: 'Where InSight listened to over 1,300 Marsquakes',
+    highlightStat: 'InSight landing site (November 2018)',
     quickFact:
-      'A flat, smooth volcanic plain nicknamed "the parking lot of Mars". NASA’s InSight robotic lander put its ear to the ground here for four years, recording hundreds of rumbling quakes and mapping Mars’ molten core.',
+      'Elysium Planitia is a flat volcanic plain where InSight recorded over 1,300 marsquakes and measured the planet’s interior structure before ending operations in December 2022.',
     clues: [
       'I am a remarkably flat volcanic plain near the Martian equator.',
       'The robotic InSight lander placed an ultra-sensitive dome seismometer on my red soil.',
@@ -210,17 +221,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/gale.png',
     pdsKeywords: 'insight elysium seis',
+    sourceUrl: 'https://images.nasa.gov/details-PIA22829',
   },
   {
     id: 'planum-australe',
     name: 'Planum Australe (South Pole)',
     category: 'ice_cap',
-    categoryLabel: 'Southern Ice Cap',
+    categoryLabel: 'Polar Region',
     lat: -85.0,
     lon: 0.0,
-    highlightStat: 'Home of seasonal erupting CO₂ geysers',
+    highlightStat: 'Southern polar cap with seasonal CO₂ ice',
     quickFact:
-      'The southern polar cap contains thick sheets of frozen carbon dioxide. Every spring, sunlight penetrates the clear ice and boils gas underneath, erupting in dark geysers of sand and dust!',
+      'Planum Australe is Mars’ south polar plateau, composed of water ice and seasonal dry ice; spring sublimation can drive geysers of dust and gas.',
     clues: [
       'I anchor the extreme southern tip of the Red Planet.',
       'My surface is composed of permanent dry ice that never fully melts in summer.',
@@ -228,17 +240,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/boreum.png',
     pdsKeywords: 'planum australe crism',
+    sourceUrl: 'https://images.nasa.gov/details-PIA03743',
   },
   {
     id: 'noctis-labyrinthus',
     name: 'Noctis Labyrinthus',
     category: 'canyon',
-    categoryLabel: 'Labyrinth of the Night',
+    categoryLabel: 'Canyon System',
     lat: -7.0,
     lon: -100.0,
-    highlightStat: 'Fractured maze of towering canyon corridors',
+    highlightStat: 'Fractured canyon network at the western end of Valles Marineris',
     quickFact:
-      'An astonishing spiderweb maze of valleys, steep chasms, and collapsed canyon blocks located at the western head of Valles Marineris. Morning water-ice clouds frequently drift through its shadowy corridors.',
+      'Noctis Labyrinthus is a network of tectonic graben and collapse valleys connecting the Tharsis region to Valles Marineris.',
     clues: [
       'My Latin name translates poetically to "The Labyrinth of the Night".',
       'I look like a chaotic fractured spiderweb of intersecting canyons and valleys.',
@@ -246,17 +259,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/valles.png',
     pdsKeywords: 'noctis labyrinthus hirise',
+    sourceUrl: 'https://images.nasa.gov/details-PIA13656',
   },
   {
     id: 'cydonia',
     name: 'Cydonia',
     category: 'feature',
-    categoryLabel: 'The "Face on Mars" Region',
+    categoryLabel: 'Mesa Region',
     lat: 40.75,
     lon: -9.5,
-    highlightStat: 'Famous for the optical illusion "Face on Mars"',
+    highlightStat: 'Region of the 1976 “Face on Mars” image',
     quickFact:
-      'A rugged transition zone dotted with rocky mesas and hills. A 1976 photo taken by Viking 1 with low sun angles created shadows resembling a human face, sparking decades of science fiction theories until higher-resolution cameras showed it was a natural hill.',
+      'Cydonia is a transition zone between the southern highlands and northern plains. A 1976 Viking image of a mesa created an optical illusion of a face; later higher-resolution images showed a natural landform.',
     clues: [
       'A 1976 orbiter photograph of one of my mesas caused a global sensation.',
       'Tricky sunlight shadows made a natural rocky hill look like a giant human face.',
@@ -264,17 +278,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/jezero.png',
     pdsKeywords: 'cydonia viking mro',
+    sourceUrl: 'https://images.nasa.gov/details-PIA01141',
   },
   {
     id: 'ares-vallis',
     name: 'Ares Vallis',
     category: 'outflow',
-    categoryLabel: 'Cataclysmic Flood Valley',
+    categoryLabel: 'Rover Landing Site',
     lat: 19.33,
     lon: -33.5,
-    highlightStat: 'Where the first wheeled Mars rover (Sojourner) landed',
+    highlightStat: 'Pathfinder/Sojourner landing site (July 1997)',
     quickFact:
-      'An ancient channel carved by a catastrophic prehistoric flood that washed rocks and boulders of every kind into one spot. On July 4, 1997, the Pathfinder lander and Sojourner rover safely bounced down here on giant airbags.',
+      'Ares Vallis is an outflow channel carved by ancient floods. Mars Pathfinder and the Sojourner rover landed here on July 4, 1997.',
     clues: [
       'A colossal flood carved this valley, depositing a treasure trove of different rocks.',
       'On July 4, 1997, NASA’s Mars Pathfinder landed here using giant bouncing airbags.',
@@ -282,17 +297,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/jezero.png',
     pdsKeywords: 'pathfinder ares vallis imp',
+    sourceUrl: 'https://images.nasa.gov/details-PIA01466',
   },
   {
     id: 'argyre-planitia',
     name: 'Argyre Basin',
     category: 'crater',
-    categoryLabel: 'Southern Frost Basin',
+    categoryLabel: 'Impact Basin',
     lat: -49.7,
     lon: -44.0,
-    highlightStat: 'Second-largest impact basin on Mars (800 km across)',
+    highlightStat: 'Second-largest impact basin on Mars (~800 km wide)',
     quickFact:
-      'A majestic circular impact basin ringed by rugged mountain peaks that rise 3 kilometers above the crater floor. During winter, bright frost clings to its slopes, giving it a shining silver appearance through telescopes.',
+      'Argyre Planitia is an ~800 km-wide impact basin in the southern hemisphere, ringed by mountain ranges.',
     clues: [
       'I am the second largest impact basin on Mars, framed by rugged mountain ridges.',
       'My name comes from a mythical island of silver in ancient Greek folklore.',
@@ -300,17 +316,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/boreum.png',
     pdsKeywords: 'argyre basin hrsc',
+    sourceUrl: 'https://images.nasa.gov/details-PIA08049',
   },
   {
     id: 'alba-mons',
     name: 'Alba Mons',
     category: 'volcano',
-    categoryLabel: 'The Sprawling Volcano',
+    categoryLabel: 'Volcano',
     lat: 40.5,
     lon: -110.0,
-    highlightStat: 'Spans over 1,600 km across the northern hemisphere',
+    highlightStat: 'Most areally extensive volcano on Mars (~1,600 km across)',
     quickFact:
-      'While only 6.8 km high, Alba Mons is the most widespread volcanic structure on Mars. Its gentle lava plains stretch over 1,600 kilometers across, covering a land area larger than the state of Alaska!',
+      'Alba Mons (Alba Patera) is a low, broad shield volcano; its lava flows cover roughly 1,600 km across, though it is only about 6.8 km high.',
     clues: [
       'I am not the tallest volcano on Mars, but my lava flows cover the widest area.',
       'I span over 1,600 kilometers across, making me wider than the entire state of Alaska.',
@@ -318,17 +335,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/olympus.png',
     pdsKeywords: 'alba mons mola',
+    sourceUrl: 'https://images.nasa.gov/details-PIA00409',
   },
   {
     id: 'medusae-fossae',
     name: 'Medusae Fossae',
     category: 'feature',
-    categoryLabel: 'Mysterious Wind Formations',
+    categoryLabel: 'Geologic Formation',
     lat: -5.0,
     lon: -147.0,
-    highlightStat: 'Massive wind-carved hills that may hide ice',
+    highlightStat: 'Wind-carved yardangs near the equator',
     quickFact:
-      'An enigmatic, soft rock formation easily sculpted by Martian winds into aerodynamic ridges called yardangs. Scientists believe it formed from prehistoric explosive ash eruptions and might contain vast reservoirs of water ice.',
+      'The Medusae Fossae Formation is a soft, easily eroded deposit near the equator, sculpted by wind into streamlined yardangs.',
     clues: [
       'Martian howling winds have sculpted my soft rocks into streamlined ridges called yardangs.',
       'I am composed of powdery volcanic ash and dust deposited billions of years ago.',
@@ -336,17 +354,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/gale.png',
     pdsKeywords: 'medusae fossae sharad',
+    sourceUrl: 'https://images.nasa.gov/details-PIA21264',
   },
   {
     id: 'kasei-valles',
     name: 'Kasei Valles',
     category: 'outflow',
-    categoryLabel: 'Mega-Flood Channel',
+    categoryLabel: 'Outflow Channel',
     lat: 24.6,
     lon: -65.0,
-    highlightStat: 'Carved by water flows 100x bigger than the Amazon',
+    highlightStat: 'One of the largest outflow channels on Mars (~3,000 km long)',
     quickFact:
-      'One of the largest outflow channel systems on Mars, stretching nearly 3,000 kilometers long. It was gouged out by torrential release of subterranean water during titanic glacial floods in Mars’ ancient past.',
+      'Kasei Valles is a large outflow channel system, in places up to ~480 km wide, carved by ancient floods.',
     clues: [
       'I am an immense flood channel system nearly 3,000 kilometers in length.',
       'Prehistoric floods that roared through me were over 100 times larger than the Amazon River.',
@@ -354,17 +373,18 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/valles.png',
     pdsKeywords: 'kasei valles mro',
+    sourceUrl: 'https://images.nasa.gov/details-PIA23845',
   },
   {
     id: 'victoria-crater',
     name: 'Victoria Crater',
     category: 'crater',
-    categoryLabel: 'Scalloped Impact Rim',
+    categoryLabel: 'Rover Exploration Site',
     lat: -2.05,
     lon: -5.5,
-    highlightStat: 'Explored by Opportunity rover for nearly 2 years',
+    highlightStat: 'Explored by Opportunity (2007–2009)',
     quickFact:
-      'An 800-meter-wide impact crater featuring breathtaking cliff alcoves and promontories nicknamed "Duck Bay" and "Cape Verde". Opportunity drove right along its jagged precipice to examine exposed bedrock layers.',
+      'Victoria is an ~800 m-wide crater with scalloped cliffs. Opportunity spent about two years examining its rim and exposed bedrock.',
     clues: [
       'An 800-meter-wide crater characterized by scalloped, jagged cliff edges.',
       'The Opportunity rover spent 22 continuous months carefully circumnavigating my rim.',
@@ -372,5 +392,6 @@ export const MARS_POIS: MarsPOI[] = [
     ],
     panoramaUrl: '/panoramas/gale.png',
     pdsKeywords: 'opportunity victoria pancam',
+    sourceUrl: 'https://images.nasa.gov/details-PIA10213',
   },
 ]

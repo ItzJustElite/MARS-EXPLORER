@@ -34,7 +34,6 @@ export function Sidebar() {
         collapsed ? 'w-14' : 'w-[var(--sidebar-width)]',
       )}
     >
-      {/* Logo area */}
       <div
         className={clsx(
           'flex items-center border-b border-[var(--color-border)]',
@@ -62,7 +61,6 @@ export function Sidebar() {
         )}
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 py-3 overflow-y-auto">
         {!collapsed && (
           <p className="px-3 mb-2 text-[9px] font-mono tracking-[0.15em] text-[var(--color-text-disabled)] uppercase">
@@ -102,7 +100,6 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      {/* Mission status indicator */}
       {!collapsed && (
         <div className="p-3 border-t border-[var(--color-border)]">
           <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-md)] p-2.5 border border-[var(--color-border-subtle)]">
@@ -120,7 +117,6 @@ export function Sidebar() {
         </div>
       )}
 
-      {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
         className={clsx(

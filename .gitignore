@@ -5,6 +5,7 @@ node_modules/
 
 # Large archives
 *.zip
+.cache/
 
 # Build output
 dist/

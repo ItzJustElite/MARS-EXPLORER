@@ -19,19 +19,6 @@ interface MarsMapProps {
   onMarkerClick?: (id: string) => void
 }
 
-/**
- * MarsMap Component
- *
- * Uses Leaflet with CRS.Simple for a flat image projection.
- *
- * IMPORTANT: This map uses CRS.Simple (image pixel coordinates)
- * rather than geographic CRS. For the initial build, it shows a
- * flat placeholder canvas. Real Martian map tiles (e.g., from
- * NASA Trek WMTS) require CORS-compatible tile servers.
- *
- * Future integration: NASA Mars Trek WMTS tiles at
- * https://trek.nasa.gov/mars/TrekServices/ws/index/WMTSCapabilities.xml
- */
 export function MarsMap({
   className = '',
   center,
@@ -47,7 +34,6 @@ export function MarsMap({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
 
-    // Use standard lat/lon CRS for now (placeholder until Mars tile server)
     const map = L.map(containerRef.current, {
       crs: L.CRS.EPSG4326,
       center: center
@@ -58,16 +44,12 @@ export function MarsMap({
       attributionControl: true,
     })
 
-    // Dark placeholder tile layer (no Earth tiles)
-    // Using OpenStreetMap only as a fallback demonstration layer
-    // Real implementation will use NASA Mars Trek tiles
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
       attribution: '<span style="color:#929AA3">⚠ PLACEHOLDER — Earth basemap shown. Real Mars tiles require NASA Trek integration. Source: NASA/JPL-Caltech (future)</span>',
       opacity: 0.3,
       maxZoom: 10,
     }).addTo(map)
 
-    // Add an overlay note about placeholder status
     const placeholderPane = map.getPane('overlayPane')
     if (placeholderPane) {
       placeholderPane.style.zIndex = '400'
@@ -91,7 +73,6 @@ export function MarsMap({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Update markers when they change
   useEffect(() => {
     const map = mapRef.current
     if (!map) return

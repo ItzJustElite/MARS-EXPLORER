@@ -45,7 +45,6 @@ export function MissionCard({ mission, selected = false, onClick }: MissionCardP
         }
       `}
     >
-      {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <Route className="w-4 h-4 text-[var(--color-accent-primary)] flex-shrink-0" />
@@ -59,12 +58,10 @@ export function MissionCard({ mission, selected = false, onClick }: MissionCardP
         </div>
       </div>
 
-      {/* Objective */}
       <p className="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed mb-3">
         {mission.objective}
       </p>
 
-      {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
         <div className="flex items-center gap-1.5">
           <Clock className="w-3 h-3 text-[var(--color-text-muted)] flex-shrink-0" />
@@ -80,7 +77,6 @@ export function MissionCard({ mission, selected = false, onClick }: MissionCardP
         </div>
       </div>
 
-      {/* Simulated warning */}
       <div className="mt-3 pt-3 border-t border-[var(--color-border-subtle)] flex items-center gap-2">
         <AlertTriangle className="w-3 h-3 text-[var(--color-status-warning)] flex-shrink-0" />
         <span className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider">

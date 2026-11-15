@@ -45,7 +45,6 @@ export function Atlas() {
 
   return (
     <div className="flex h-full overflow-hidden">
-      {/* Left panel: region list */}
       <aside className="w-56 flex-shrink-0 border-r border-[var(--color-border)] flex flex-col overflow-hidden">
         <div className="px-3 py-3 border-b border-[var(--color-border)]">
           <h2 className="font-heading text-xs font-semibold text-[var(--color-text-primary)]">
@@ -78,16 +77,13 @@ export function Atlas() {
         </div>
       </aside>
 
-      {/* Main map area */}
       <div className="flex-1 relative overflow-hidden">
-        {/* Placeholder warning */}
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20">
           <Badge variant="warning" size="sm" dot>
             Placeholder Basemap — Earth tiles shown. Mars tiles require NASA Trek integration.
           </Badge>
         </div>
 
-        {/* Map */}
         <MarsMap
           className="w-full h-full"
           center={center}
@@ -95,12 +91,10 @@ export function Atlas() {
           markers={mapMarkers}
         />
 
-        {/* Map controls overlay */}
         <div className="absolute top-12 right-3 z-10">
           <MapControls />
         </div>
 
-        {/* Selected region info overlay */}
         {selectedRegion && (() => {
           const r = MARS_REGIONS.find((reg) => reg.id === selectedRegion)
           if (!r) return null
@@ -120,7 +114,6 @@ export function Atlas() {
         })()}
       </div>
 
-      {/* Right panel: layer controls */}
       <aside className="w-56 flex-shrink-0 border-l border-[var(--color-border)] overflow-y-auto p-3">
         <LayerControls
           layers={layers}
@@ -128,7 +121,6 @@ export function Atlas() {
           onToggleLayer={handleToggleLayer}
         />
 
-        {/* Attribution */}
         <div className="mt-4 p-2 rounded-[var(--radius-sm)] bg-[var(--color-bg-primary)] border border-[var(--color-border-subtle)]">
           <p className="text-[9px] text-[var(--color-text-disabled)] leading-relaxed">
             Scientific layers from NASA MRO, HiRISE, CRISM, MOLA, and Mars Express HRSC.

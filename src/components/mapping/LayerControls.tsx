@@ -31,7 +31,6 @@ export function LayerControls({ layers, activeLayers, onToggleLayer }: LayerCont
 
   return (
     <div className="bg-[var(--color-bg-panel)] border border-[var(--color-border)] rounded-[var(--radius-lg)] overflow-hidden">
-      {/* Header */}
       <button
         onClick={() => setExpanded(!expanded)}
         className="

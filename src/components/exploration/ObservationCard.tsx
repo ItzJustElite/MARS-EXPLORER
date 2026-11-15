@@ -25,7 +25,6 @@ export function ObservationCard({ observation, selected = false, onClick }: Obse
         }
       `}
     >
-      {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
         <div className="flex-1 min-w-0">
           <h3 className="font-heading text-sm font-semibold text-[var(--color-text-primary)] truncate">
@@ -38,7 +37,6 @@ export function ObservationCard({ observation, selected = false, onClick }: Obse
         <Badge variant={sourceBadgeVariant} size="sm">{sourceLabel}</Badge>
       </div>
 
-      {/* Metadata grid */}
       <div className="grid grid-cols-2 gap-2 mb-3">
         <div className="flex items-center gap-1.5">
           <Camera className="w-3 h-3 text-[var(--color-text-muted)] flex-shrink-0" />
@@ -60,12 +58,10 @@ export function ObservationCard({ observation, selected = false, onClick }: Obse
         </div>
       </div>
 
-      {/* Description */}
       <p className="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
         {observation.description}
       </p>
 
-      {/* Panorama availability */}
       <div className="mt-3 pt-3 border-t border-[var(--color-border-subtle)] flex items-center gap-2">
         <div className={`w-1.5 h-1.5 rounded-full ${observation.panorama ? 'bg-[var(--color-status-active)]' : 'bg-[var(--color-text-disabled)]'}`} />
         <span className="text-[10px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider">

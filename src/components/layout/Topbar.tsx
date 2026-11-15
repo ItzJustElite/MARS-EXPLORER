@@ -24,7 +24,6 @@ export function Topbar() {
         flex-shrink-0
       "
     >
-      {/* Page title */}
       <div className="flex items-center gap-3">
         <div className="accent-line w-4 h-full" />
         <div>
@@ -37,9 +36,7 @@ export function Topbar() {
         </div>
       </div>
 
-      {/* Right side indicators */}
       <div className="flex items-center gap-4">
-        {/* UTC Clock */}
         <div className="hidden md:flex flex-col items-end">
           <span className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider">
             Earth UTC
@@ -49,13 +46,11 @@ export function Topbar() {
           </span>
         </div>
 
-        {/* Data connection status */}
         <div className="flex items-center gap-1.5">
           <Wifi className="w-3.5 h-3.5 text-[var(--color-text-muted)]" />
           <Badge variant="muted" size="sm">Offline Mode</Badge>
         </div>
 
-        {/* Signal */}
         <div className="flex items-center gap-1.5">
           <Signal className="w-3.5 h-3.5 text-[var(--color-status-active)]" />
           <span className="text-[10px] font-mono text-[var(--color-status-active)] hidden sm:inline">
@@ -63,7 +58,6 @@ export function Topbar() {
           </span>
         </div>
 
-        {/* Notifications placeholder */}
         <button
           className="
             w-7 h-7 flex items-center justify-center rounded-[var(--radius-md)]

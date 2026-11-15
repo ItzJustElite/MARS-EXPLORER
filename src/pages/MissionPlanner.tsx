@@ -44,7 +44,6 @@ export function MissionPlanner() {
 
   return (
     <div className="flex h-full overflow-hidden">
-      {/* Mission list */}
       <aside className="w-72 flex-shrink-0 border-r border-[var(--color-border)] flex flex-col overflow-hidden">
         <div className="px-4 py-3 border-b border-[var(--color-border)] flex items-center justify-between">
           <h2 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
@@ -53,7 +52,6 @@ export function MissionPlanner() {
           <Badge variant="muted" size="sm">{missions.length} planned</Badge>
         </div>
 
-        {/* Disclaimer */}
         <div className="mx-3 mt-3 p-2.5 rounded-[var(--radius-md)] bg-[var(--color-bg-primary)] border border-[rgba(251,191,36,0.2)]">
           <div className="flex items-start gap-2">
             <AlertTriangle className="w-3 h-3 text-[var(--color-status-warning)] flex-shrink-0 mt-0.5" />
@@ -73,7 +71,6 @@ export function MissionPlanner() {
             />
           ))}
 
-          {/* New mission placeholder */}
           <button
             disabled
             className="
@@ -89,9 +86,7 @@ export function MissionPlanner() {
         </div>
       </aside>
 
-      {/* Main area */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        {/* Mission map */}
         <div className="flex-1 relative min-h-0">
           <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10">
             <Badge variant="warning" size="sm" dot>Placeholder Map — Simulated route</Badge>
@@ -102,7 +97,6 @@ export function MissionPlanner() {
             markers={mapMarkers}
             zoom={6}
           />
-          {/* Legend */}
           <div className="absolute bottom-3 right-3 z-10">
             <div className="flex flex-col gap-1.5 bg-[rgba(9,11,14,0.85)] border border-[var(--color-border)] rounded-[var(--radius-md)] p-2.5 backdrop-blur-sm">
               <div className="flex items-center gap-2">
@@ -117,7 +111,6 @@ export function MissionPlanner() {
           </div>
         </div>
 
-        {/* Route info strip */}
         {selected && (
           <div className="border-t border-[var(--color-border)] px-4 py-3 flex items-center gap-6 flex-shrink-0 flex-wrap">
             <div className="flex items-center gap-2">
@@ -148,7 +141,6 @@ export function MissionPlanner() {
         )}
       </div>
 
-      {/* Detail panel */}
       <aside className="w-72 flex-shrink-0 border-l border-[var(--color-border)] overflow-y-auto">
         {selected ? (
           <>
@@ -160,7 +152,6 @@ export function MissionPlanner() {
             </div>
 
             <div className="p-4 space-y-5">
-              {/* Objective */}
               <div>
                 <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-1.5">
                   Mission Objective
@@ -170,7 +161,6 @@ export function MissionPlanner() {
                 </p>
               </div>
 
-              {/* Crew & Priority */}
               <div className="grid grid-cols-2 gap-3">
                 <Panel variant="flat" padding="sm">
                   <div className="flex items-center gap-2 mb-1">
@@ -202,7 +192,6 @@ export function MissionPlanner() {
                 </Panel>
               </div>
 
-              {/* Resources */}
               <div>
                 <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                   Resources
@@ -238,7 +227,6 @@ export function MissionPlanner() {
                 </div>
               </div>
 
-              {/* Tools */}
               <div>
                 <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                   Equipment Manifest
@@ -253,7 +241,6 @@ export function MissionPlanner() {
                 </ul>
               </div>
 
-              {/* Notes */}
               {selected.notes && (
                 <div>
                   <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-1.5">

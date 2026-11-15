@@ -1,157 +1,238 @@
-// Lightweight synthesized Web Audio sound generator
-// Zero external assets, works offline and instantly!
+// Lightweight synthesized Web Audio sound generator.
+// All sounds are generated procedurally (zero external assets), so the game
+// works offline and no audio licensing/credits are required. Everything is
+// tuned to a low, grim, lo-fi space palette to match the ambient drone.
+//
+// Credits: NASA imagery attribution lives in public/panoramas/README.txt and
+// in the in-game Credits panel. Audio is original synthesis.
 
 class SoundEngine {
   private ctx: AudioContext | null = null
   private isMuted: boolean = false
-  private droneOsc: OscillatorNode | null = null
-  private droneGain: GainNode | null = null
+  private droneNodes: { osc1: OscillatorNode; osc2: OscillatorNode; lfo: OscillatorNode; gain: GainNode } | null = null
 
   private init() {
-    if (!this.ctx && typeof window !== 'undefined') {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
-      if (AudioCtx) {
-        this.ctx = new AudioCtx()
-      }
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume()
-    }
+    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume()
+    if (this.ctx) return
+    if (typeof window === 'undefined') return
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    if (AudioCtx) this.ctx = new AudioCtx()
   }
 
   setMuted(muted: boolean) {
     this.isMuted = muted
-    if (muted && this.droneGain) {
-      this.droneGain.gain.setValueAtTime(0, this.ctx?.currentTime || 0)
-    } else if (!muted && this.droneGain && this.ctx) {
-      this.droneGain.gain.setValueAtTime(0.04, this.ctx.currentTime)
+    if (muted) {
+      if (this.droneNodes) this.droneNodes.gain.gain.setValueAtTime(0, this.ctx?.currentTime || 0)
+    } else if (this.droneNodes && this.ctx) {
+      this.droneNodes.gain.gain.setValueAtTime(0.05, this.ctx.currentTime)
     }
   }
 
-  getMuted(): boolean {
-    return this.isMuted
-  }
+  getMuted(): boolean { return this.isMuted }
 
-  // Soft atmospheric cosmic drone in the background
+  // Low, grim ambient drone with slow LFO movement.
   startAmbientDrone() {
-    if (this.isMuted || this.droneOsc) return
+    if (this.isMuted || this.droneNodes) return
     try {
       this.init()
       if (!this.ctx) return
+      const ctx = this.ctx
+      const now = ctx.currentTime
 
-      const osc = this.ctx.createOscillator()
-      const filter = this.ctx.createBiquadFilter()
-      const gain = this.ctx.createGain()
+      const osc1 = ctx.createOscillator()
+      const osc2 = ctx.createOscillator()
+      const filter = ctx.createBiquadFilter()
+      const gain = ctx.createGain()
+      const lfo = ctx.createOscillator()
+      const lfoGain = ctx.createGain()
 
-      osc.type = 'sine'
-      osc.frequency.setValueAtTime(55, this.ctx.currentTime) // Low A note
+      osc1.type = 'sine'
+      osc1.frequency.setValueAtTime(55, now) // A1
+      osc2.type = 'triangle'
+      osc2.frequency.setValueAtTime(82.4, now) // E2
+      osc2.detune.setValueAtTime(-7, now)
 
       filter.type = 'lowpass'
-      filter.frequency.setValueAtTime(120, this.ctx.currentTime)
+      filter.frequency.setValueAtTime(150, now)
+      filter.Q.setValueAtTime(1.2, now)
 
-      gain.gain.setValueAtTime(0.03, this.ctx.currentTime)
+      gain.gain.setValueAtTime(0.0, now)
+      gain.gain.linearRampToValueAtTime(0.05, now + 1.5)
 
-      osc.connect(filter)
+      lfo.type = 'sine'
+      lfo.frequency.setValueAtTime(0.07, now)
+      lfoGain.gain.setValueAtTime(60, now)
+      lfo.connect(lfoGain)
+      lfoGain.connect(filter.frequency)
+
+      osc1.connect(filter)
+      osc2.connect(filter)
       filter.connect(gain)
-      gain.connect(this.ctx.destination)
+      gain.connect(ctx.destination)
 
-      osc.start()
-      this.droneOsc = osc
-      this.droneGain = gain
+      osc1.start(now)
+      osc2.start(now)
+      lfo.start(now)
+
+      this.droneNodes = { osc1, osc2, lfo, gain }
     } catch {
       // Audio autoplay policy catch
     }
   }
 
-  // Futuristic UI button click
+  stopAmbientDrone() {
+    if (!this.droneNodes || !this.ctx) return
+    try {
+      const { osc1, osc2, lfo, gain } = this.droneNodes
+      const now = this.ctx.currentTime
+      gain.gain.linearRampToValueAtTime(0, now + 1)
+      osc1.stop(now + 1.1)
+      osc2.stop(now + 1.1)
+      lfo.stop(now + 1.1)
+      this.droneNodes = null
+    } catch {
+      this.droneNodes = null
+    }
+  }
+
+  // ---- helpers ----
+  private tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0.12, slide?: number, filterFreq?: number) {
+    if (this.isMuted) return
+    try {
+      this.init()
+      if (!this.ctx) return
+      const ctx = this.ctx
+      const now = ctx.currentTime
+      const osc = ctx.createOscillator()
+      const g = ctx.createGain()
+      if (filterFreq) {
+        const f = ctx.createBiquadFilter()
+        f.type = 'lowpass'
+        f.frequency.setValueAtTime(filterFreq, now)
+        osc.connect(f)
+        f.connect(g)
+      } else {
+        osc.connect(g)
+      }
+      g.connect(ctx.destination)
+
+      osc.type = type
+      osc.frequency.setValueAtTime(freq, now)
+      if (slide) osc.frequency.exponentialRampToValueAtTime(Math.max(20, slide), now + dur)
+
+      g.gain.setValueAtTime(gain, now)
+      g.gain.exponentialRampToValueAtTime(0.001, now + dur)
+
+      osc.start(now)
+      osc.stop(now + dur + 0.02)
+    } catch {
+      // ignored
+    }
+  }
+
+  private noise(dur: number, gain = 0.06, filterFreq = 400) {
+    if (this.isMuted) return
+    try {
+      this.init()
+      if (!this.ctx) return
+      const ctx = this.ctx
+      const now = ctx.currentTime
+      const bufferSize = Math.floor(ctx.sampleRate * dur)
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
+      const data = buffer.getChannelData(0)
+      for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize)
+      const src = ctx.createBufferSource()
+      src.buffer = buffer
+      const filter = ctx.createBiquadFilter()
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(filterFreq, now)
+      const g = ctx.createGain()
+      g.gain.setValueAtTime(gain, now)
+      g.gain.exponentialRampToValueAtTime(0.001, now + dur)
+      src.connect(filter)
+      filter.connect(g)
+      g.connect(ctx.destination)
+      src.start(now)
+      src.stop(now + dur + 0.02)
+    } catch {
+      // ignored
+    }
+  }
+
+  // ---- public SFX (all low-tone) ----
+
   playClick() {
-    if (this.isMuted) return
-    try {
-      this.init()
-      if (!this.ctx) return
-
-      const osc = this.ctx.createOscillator()
-      const gain = this.ctx.createGain()
-
-      osc.type = 'sine'
-      osc.frequency.setValueAtTime(800, this.ctx.currentTime)
-      osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.06)
-
-      gain.gain.setValueAtTime(0.12, this.ctx.currentTime)
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06)
-
-      osc.connect(gain)
-      gain.connect(this.ctx.destination)
-
-      osc.start()
-      osc.stop(this.ctx.currentTime + 0.06)
-    } catch {
-      // Ignored
-    }
+    this.tone(150, 0.07, 'square', 0.09, 70, 600)
+    this.noise(0.04, 0.04, 500)
   }
 
-  // Soft high-tech beacon select chime
+  playHover() {
+    this.tone(110, 0.04, 'sine', 0.04, undefined, 300)
+  }
+
   playBeaconSelect() {
-    if (this.isMuted) return
-    try {
-      this.init()
-      if (!this.ctx) return
+    this.tone(110, 0.12, 'sine', 0.1, 165, 700)
+    setTimeout(() => this.tone(165, 0.18, 'sine', 0.09, 110, 700), 90)
+  }
 
-      const now = this.ctx.currentTime
-      const freqs = [523.25, 659.25, 783.99] // C5, E5, G5 chord
+  playNavigate() {
+    this.tone(130, 0.09, 'triangle', 0.08, 90, 600)
+    this.noise(0.05, 0.03, 400)
+  }
 
-      freqs.forEach((freq, i) => {
-        if (!this.ctx) return
-        const osc = this.ctx.createOscillator()
-        const gain = this.ctx.createGain()
+  playGuess() {
+    this.tone(90, 0.14, 'sine', 0.12, 60, 500)
+    this.noise(0.06, 0.05, 350)
+  }
 
-        osc.type = 'sine'
-        osc.frequency.setValueAtTime(freq, now + i * 0.05)
+  playHint() {
+    this.tone(180, 0.08, 'sine', 0.07, 120, 500)
+  }
 
-        gain.gain.setValueAtTime(0.08, now + i * 0.05)
-        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.35)
+  playToggle() {
+    this.tone(120, 0.06, 'square', 0.07, 180, 500)
+  }
 
-        osc.connect(gain)
-        gain.connect(this.ctx.destination)
+  playReveal(points: number) {
+    const chord = points >= 4000
+      ? [110, 165, 220]
+      : points >= 1500
+        ? [98, 130.8, 164.8]
+        : [82.4, 110, 130.8]
+    chord.forEach((f, i) => setTimeout(() => this.tone(f, 0.4, 'sine', 0.1, f * 0.5, 700), i * 110))
+  }
 
-        osc.start(now + i * 0.05)
-        osc.stop(now + i * 0.05 + 0.35)
-      })
-    } catch {
-      // Ignored
+  playScoreCelebration(points: number) {
+    this.playReveal(points)
+    if (points >= 4500) {
+      setTimeout(() => this.tone(220, 0.3, 'triangle', 0.08, 330, 900), 360)
     }
   }
 
-  // Round victory / score fanfare
-  playScoreCelebration(points: number) {
-    if (this.isMuted) return
-    try {
-      this.init()
-      if (!this.ctx) return
+  playBullseye() {
+    this.tone(110, 0.15, 'sine', 0.12, 220, 800)
+    setTimeout(() => this.tone(220, 0.25, 'sine', 0.1, 110, 900), 120)
+    setTimeout(() => this.tone(330, 0.3, 'triangle', 0.08, 165, 1000), 260)
+  }
 
-      const now = this.ctx.currentTime
-      const chord = points > 3500 ? [523.25, 659.25, 783.99, 1046.5] : [440, 554.37, 659.25]
+  playGameOver() {
+    [220, 165, 110, 82.4].forEach((f, i) =>
+      setTimeout(() => this.tone(f, 0.35, 'sine', 0.09, f * 0.6, 600), i * 180),
+    )
+  }
 
-      chord.forEach((freq, idx) => {
-        if (!this.ctx) return
-        const osc = this.ctx.createOscillator()
-        const gain = this.ctx.createGain()
+  playError() {
+    this.tone(110, 0.18, 'sawtooth', 0.08, 55, 400)
+    this.noise(0.12, 0.04, 300)
+  }
 
-        osc.type = 'triangle'
-        osc.frequency.setValueAtTime(freq, now + idx * 0.08)
+  playSuccess() {
+    this.tone(165, 0.12, 'sine', 0.1, 220, 700)
+    setTimeout(() => this.tone(220, 0.18, 'sine', 0.09, 165, 800), 100)
+  }
 
-        gain.gain.setValueAtTime(0.15, now + idx * 0.08)
-        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.5)
-
-        osc.connect(gain)
-        gain.connect(this.ctx.destination)
-
-        osc.start(now + idx * 0.08)
-        osc.stop(now + idx * 0.08 + 0.5)
-      })
-    } catch {
-      // Ignored
-    }
+  playExit() {
+    this.tone(130, 0.12, 'sine', 0.08, 65, 500)
   }
 }
 

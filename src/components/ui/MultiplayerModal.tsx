@@ -17,7 +17,6 @@ export function MultiplayerModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-md select-none animate-in fade-in duration-150">
       <div className="relative w-full max-w-lg rounded-3xl border border-white/20 bg-[#10141a]/95 backdrop-blur-2xl p-8 md:p-10 text-white shadow-2xl text-center space-y-6">
-        {/* Close Button */}
         <button
           onClick={() => {
             sound.playClick()
@@ -28,12 +27,10 @@ export function MultiplayerModal({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Icon Badge */}
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-blue-500/20 text-blue-400 border border-blue-500/30 shadow-xl shadow-blue-500/20">
           <Swords className="w-10 h-10" />
         </div>
 
-        {/* Title */}
         <div className="space-y-2">
           <span className="inline-block px-3.5 py-1 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30 text-xs font-semibold uppercase tracking-wider">
             Multiplayer Mode
@@ -48,7 +45,6 @@ export function MultiplayerModal({
           In Phase 2, challenge friends in live, turn-based planetary duels to see who can identify Martian surface features fastest.
         </p>
 
-        {/* Features Preview */}
         <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-left space-y-3">
           <div className="flex items-center gap-3 text-xs md:text-sm text-neutral-200">
             <Radio className="w-4 h-4 text-blue-400 flex-shrink-0" />
@@ -64,7 +60,6 @@ export function MultiplayerModal({
           </div>
         </div>
 
-        {/* Action Button */}
         <div className="flex flex-col gap-3 pt-2">
           <button
             onClick={() => {

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { MARS_POIS, type MarsPOI } from '@/data/marsPois'
+import { poiCategoryColor } from '@/components/ui/PoiCategoryIcon'
 
 interface MarsCanvasProps {
   selectedPoi: MarsPOI | null
@@ -64,6 +65,26 @@ export function MarsCanvas({
   const markerMeshesRef = useRef<Map<string, THREE.Group>>(new Map())
   const guessMarkerRef = useRef<THREE.Group | null>(null)
   const arcLineRef = useRef<THREE.Line | null>(null)
+
+  // Refs mirroring props so the (mount-only) render loop always sees fresh values
+  // without tearing down and reloading the Mars model/textures.
+  const selectedPoiRef = useRef<MarsPOI | null>(selectedPoi)
+  const onScreenPointUpdateRef = useRef(onScreenPointUpdate)
+  const autoRotateRef = useRef(autoRotate)
+  const rotationSpeedRef = useRef(rotationSpeed)
+
+  useEffect(() => {
+    selectedPoiRef.current = selectedPoi
+  }, [selectedPoi])
+  useEffect(() => {
+    onScreenPointUpdateRef.current = onScreenPointUpdate
+  }, [onScreenPointUpdate])
+  useEffect(() => {
+    autoRotateRef.current = autoRotate
+  }, [autoRotate])
+  useEffect(() => {
+    rotationSpeedRef.current = rotationSpeed
+  }, [rotationSpeed])
 
   // Interaction & rotation state
   const isDraggingRef = useRef<boolean>(false)
@@ -292,50 +313,78 @@ export function MarsCanvas({
       }
     )
 
-    // 10. Create 3D Clickable Circular Beacon Targets for the 20 POIs
+    // 10. Create 3D Clickable Beacon Targets for the 20 POIs, using a
+    // category-colored sprite so each kind of feature is recognizable.
     const markerMap = new Map<string, THREE.Group>()
+
+    const makeMarkerTexture = (category: string): THREE.CanvasTexture => {
+      const color = poiCategoryColor(category)
+      const canvas = document.createElement('canvas')
+      canvas.width = 128
+      canvas.height = 128
+      const c = canvas.getContext('2d')!
+      // glow
+      const g = c.createRadialGradient(64, 64, 8, 64, 64, 60)
+      g.addColorStop(0, color)
+      g.addColorStop(1, 'rgba(0,0,0,0)')
+      c.fillStyle = g
+      c.fillRect(0, 0, 128, 128)
+      // core circle
+      c.beginPath()
+      c.arc(64, 64, 26, 0, Math.PI * 2)
+      c.fillStyle = color
+      c.fill()
+      c.lineWidth = 4
+      c.strokeStyle = 'rgba(255,255,255,0.85)'
+      c.stroke()
+      // symbol
+      c.fillStyle = '#ffffff'
+      c.font = 'bold 40px sans-serif'
+      c.textAlign = 'center'
+      c.textBaseline = 'middle'
+      const symbol =
+        category === 'volcano' ? '▲' :
+        category === 'canyon' ? '≋' :
+        category === 'crater' ? '○' :
+        category === 'ice_cap' ? '❄' :
+        category === 'outflow' ? '↳' :
+        category === 'rover_site' ? 'R' : '★'
+      c.fillText(symbol, 64, 68)
+      return new THREE.CanvasTexture(canvas)
+    }
+
+    const textures = new Map<string, THREE.CanvasTexture>()
 
     MARS_POIS.forEach((poi) => {
       const markerGroup = new THREE.Group()
-      const pos = latLonToVector3(poi.lat, poi.lon, MARS_RADIUS * 1.006)
+      const pos = latLonToVector3(poi.lat, poi.lon, MARS_RADIUS * 1.01)
       markerGroup.position.copy(pos)
 
       // Orient marker along surface normal
       markerGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize())
 
-      // Clickable Outer Target Ring (Flush with Mars surface)
-      const ringGeom = new THREE.RingGeometry(0.06, 0.12, 32)
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xff6b35,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.9,
-      })
-      const ring = new THREE.Mesh(ringGeom, ringMat)
-      ring.userData = { poiId: poi.id }
-      markerGroup.add(ring)
+      if (!textures.has(poi.category)) textures.set(poi.category, makeMarkerTexture(poi.category))
+      const tex = textures.get(poi.category)!
 
-      // Clickable Inner Glowing Core Dot
-      const dotGeom = new THREE.CircleGeometry(0.045, 24)
-      const dotMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        side: THREE.DoubleSide,
-      })
-      const dot = new THREE.Mesh(dotGeom, dotMat)
-      dot.position.z = 0.002
-      dot.userData = { poiId: poi.id }
-      markerGroup.add(dot)
+      const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: true, depthWrite: false })
+      const sprite = new THREE.Sprite(spriteMat)
+      sprite.scale.set(0.32, 0.32, 1)
+      sprite.userData = { poiId: poi.id }
+      markerGroup.add(sprite)
 
-      // Pulsing Wave Ring
+      // Pulsing halo ring (category colored)
+      const color = new THREE.Color(poiCategoryColor(poi.category))
       const pulseGeom = new THREE.RingGeometry(0.13, 0.165, 32)
       const pulseMat = new THREE.MeshBasicMaterial({
-        color: 0xffa066,
+        color,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.55,
+        depthWrite: false,
       })
       const pulse = new THREE.Mesh(pulseGeom, pulseMat)
       pulse.position.z = 0.001
+      pulse.userData = { poiId: poi.id }
       markerGroup.add(pulse)
 
       marsGroup.add(markerGroup)
@@ -372,9 +421,9 @@ export function MarsCanvas({
         if (Math.abs(diffX) < 0.005 && Math.abs(diffY) < 0.005) {
           targetRotationRef.current = null
         }
-      } else if (autoRotate && !isDraggingRef.current && marsGroupRef.current) {
+      } else if (autoRotateRef.current && !isDraggingRef.current && marsGroupRef.current) {
         // Slow idle auto-spin
-        marsGroupRef.current.rotation.y += rotationSpeed * 0.008
+        marsGroupRef.current.rotation.y += rotationSpeedRef.current * 0.008
       }
 
       // Apply drag inertia
@@ -386,26 +435,35 @@ export function MarsCanvas({
       }
 
       // Animate pulsing rings on markers
+      const markerWorldPosition = new THREE.Vector3()
       markerMap.forEach((group, poiId) => {
-        const ring = group.children[2] as THREE.Mesh
-        if (ring) {
-          const isSelected = selectedPoi?.id === poiId
+        // Hide markers on the far side of the globe
+        if (cameraRef.current) {
+          group.getWorldPosition(markerWorldPosition)
+          const toCam = cameraRef.current.position.clone().sub(markerWorldPosition).normalize()
+          const normal = markerWorldPosition.clone().normalize()
+          group.visible = normal.dot(toCam) > 0.05
+        }
+        const pulse = group.children[1] as THREE.Mesh
+        if (pulse) {
+          const isSelected = selectedPoiRef.current?.id === poiId
           const scale = isSelected
             ? 1.0 + Math.sin(elapsedTime * 4.5) * 0.35
             : 0.85 + Math.sin(elapsedTime * 2.5) * 0.15
-          ring.scale.set(scale, scale, scale)
-
-          const head = group.children[1] as THREE.Mesh
-          if (head) {
-            const headScale = isSelected ? 1.35 : 1.0
-            head.scale.lerp(new THREE.Vector3(headScale, headScale, headScale), 0.1)
-          }
+          pulse.scale.set(scale, scale, scale)
+        }
+        const sprite = group.children[0] as THREE.Sprite
+        if (sprite) {
+          const isSelected = selectedPoiRef.current?.id === poiId
+          const sc = isSelected ? 0.42 : 0.32
+          sprite.scale.lerp(new THREE.Vector3(sc, sc, 1), 0.1)
         }
       })
 
       // Project active POI to 2D screen coordinates
-      if (selectedPoi && cameraRef.current && onScreenPointUpdate && marsGroupRef.current) {
-        const poiPos = latLonToVector3(selectedPoi.lat, selectedPoi.lon, MARS_RADIUS * 1.01)
+      const activePoi = selectedPoiRef.current
+      if (activePoi && cameraRef.current && onScreenPointUpdateRef.current && marsGroupRef.current) {
+        const poiPos = latLonToVector3(activePoi.lat, activePoi.lon, MARS_RADIUS * 1.01)
         poiPos.applyMatrix4(marsGroupRef.current.matrixWorld)
 
         // Check if marker is facing the camera
@@ -420,7 +478,7 @@ export function MarsCanvas({
         const screenX = poiPos.x * halfWidth + halfWidth
         const screenY = -(poiPos.y * halfHeight) + halfHeight
 
-        onScreenPointUpdate({ x: screenX, y: screenY, isVisible })
+        onScreenPointUpdateRef.current({ x: screenX, y: screenY, isVisible })
       }
 
       // Slow star twinkle
@@ -450,7 +508,8 @@ export function MarsCanvas({
       }
       renderer.dispose()
     }
-  }, [selectedPoi, autoRotate, rotationSpeed, onScreenPointUpdate])
+  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   // Mouse / Touch interaction handlers
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -507,8 +566,8 @@ export function MarsCanvas({
     // Check intersections with all clickable beacon target disks
     const interactiveObjects: THREE.Object3D[] = []
     markerMeshesRef.current.forEach((group) => {
-      interactiveObjects.push(group.children[0]) // target ring
-      interactiveObjects.push(group.children[1]) // target dot
+      interactiveObjects.push(group.children[0]) // sprite
+      interactiveObjects.push(group.children[1]) // pulse ring
     })
 
     const markerIntersects = raycaster.intersectObjects(interactiveObjects, false)
@@ -623,7 +682,6 @@ export function MarsCanvas({
       onClick={handleClick}
       onWheel={handleWheel}
     >
-      {/* Loading Overlay */}
       {!isLoaded && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#090b0e] bg-opacity-90 backdrop-blur-sm pointer-events-none transition-opacity duration-700">
           <div className="w-14 h-14 border-4 border-[#ff6b35] border-t-transparent rounded-full animate-spin mb-4" />

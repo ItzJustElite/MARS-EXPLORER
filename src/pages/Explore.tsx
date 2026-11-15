@@ -23,7 +23,6 @@ export function Explore() {
 
   return (
     <div className="flex h-full overflow-hidden">
-      {/* Observation list */}
       <aside className="w-72 flex-shrink-0 border-r border-[var(--color-border)] flex flex-col overflow-hidden">
         <div className="px-4 py-3 border-b border-[var(--color-border)] flex items-center justify-between">
           <h2 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
@@ -43,9 +42,7 @@ export function Explore() {
         </div>
       </aside>
 
-      {/* Main exploration area */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        {/* Panorama viewport */}
         <div className="flex-1 relative p-4 min-h-0">
           <PanoramaViewer
             src={selected?.panorama ?? null}
@@ -53,7 +50,6 @@ export function Explore() {
             className="w-full h-full"
           />
 
-          {/* Observation info overlay */}
           {selected && (
             <div className="absolute bottom-6 left-6 right-6 max-w-lg">
               <div className="bg-[rgba(9,11,14,0.85)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-3 backdrop-blur-sm">
@@ -73,7 +69,6 @@ export function Explore() {
           )}
         </div>
 
-        {/* Map strip */}
         <div className="h-48 border-t border-[var(--color-border)] relative flex-shrink-0">
           <div className="absolute top-2 left-2 z-10">
             <Badge variant="warning" size="sm" dot>Earth Basemap — Placeholder</Badge>
@@ -87,7 +82,6 @@ export function Explore() {
         </div>
       </div>
 
-      {/* Detail panel */}
       <aside className="w-64 flex-shrink-0 border-l border-[var(--color-border)] overflow-y-auto">
         <div className="px-4 py-3 border-b border-[var(--color-border)]">
           <h2 className="font-heading text-sm font-semibold text-[var(--color-text-primary)]">
@@ -97,7 +91,6 @@ export function Explore() {
 
         {selected ? (
           <div className="p-4 space-y-5">
-            {/* Instrument */}
             <div>
               <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                 Instrument
@@ -106,7 +99,6 @@ export function Explore() {
               <p className="text-xs text-[var(--color-text-muted)]">{selected.rover}</p>
             </div>
 
-            {/* Coordinates */}
             <div>
               <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                 Areocentric Coordinates
@@ -119,7 +111,6 @@ export function Explore() {
               </p>
             </div>
 
-            {/* Sol */}
             <div>
               <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                 Sol / Earth Date
@@ -128,7 +119,6 @@ export function Explore() {
               <p className="text-xs text-[var(--color-text-muted)]">{selected.observationDate}</p>
             </div>
 
-            {/* Data sources */}
             <div>
               <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                 Data Sources
@@ -142,7 +132,6 @@ export function Explore() {
               </div>
             </div>
 
-            {/* Description */}
             <div>
               <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
                 Description
@@ -152,7 +141,6 @@ export function Explore() {
               </p>
             </div>
 
-            {/* Source link */}
             {selected.sourceUrl && (
               <div>
                 <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">

@@ -77,26 +77,21 @@ const CAPABILITY_CARDS = [
 export function Dashboard() {
   return (
     <div className="min-h-full">
-      {/* Hero section */}
       <section className="relative overflow-hidden border-b border-[var(--color-border)]">
-        {/* Background grid pattern */}
         <div className="absolute inset-0 mars-grid opacity-60" />
 
-        {/* Accent glow */}
         <div
           className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-5"
           style={{ background: 'var(--color-accent-primary)' }}
         />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-16">
-          {/* Badge */}
           <div className="flex items-center gap-3 mb-8">
             <Badge variant="accent" size="sm" dot>NASA Space Apps Challenge 2026</Badge>
             <span className="text-[var(--color-border)]">·</span>
             <Badge variant="muted" size="sm">Interplanetary Survival Guide: Martian Map</Badge>
           </div>
 
-          {/* Title */}
           <h1
             className="font-heading font-bold mb-4 text-[var(--color-text-primary)]"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
@@ -115,7 +110,6 @@ export function Dashboard() {
             Built for the 2026 NASA Space Apps Challenge.
           </p>
 
-          {/* CTA buttons */}
           <div className="flex flex-wrap gap-3">
             <Link
               to={ROUTES.EXPLORE}
@@ -159,10 +153,8 @@ export function Dashboard() {
         </div>
       </section>
 
-      {/* Main content */}
       <div className="max-w-5xl mx-auto px-6 py-10 space-y-10">
 
-        {/* Disclaimer */}
         <Panel variant="flat" padding="md">
           <div className="flex gap-3">
             <Info className="w-4 h-4 text-[var(--color-status-info)] flex-shrink-0 mt-0.5" />
@@ -179,7 +171,6 @@ export function Dashboard() {
           </div>
         </Panel>
 
-        {/* Quick navigation */}
         <section>
           <h2 className="font-heading text-base font-semibold text-[var(--color-text-primary)] mb-4">
             Exploration Modules
@@ -219,7 +210,6 @@ export function Dashboard() {
           </div>
         </section>
 
-        {/* Key Region: Jezero Crater */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-heading text-base font-semibold text-[var(--color-text-primary)]">
@@ -267,7 +257,6 @@ export function Dashboard() {
           </Panel>
         </section>
 
-        {/* Mars regions reference */}
         <section>
           <h2 className="font-heading text-base font-semibold text-[var(--color-text-primary)] mb-4">
             Key Martian Regions
@@ -298,7 +287,6 @@ export function Dashboard() {
           </div>
         </section>
 
-        {/* Platform capabilities */}
         <section>
           <h2 className="font-heading text-base font-semibold text-[var(--color-text-primary)] mb-4">
             Platform Capabilities
@@ -326,7 +314,6 @@ export function Dashboard() {
           </div>
         </section>
 
-        {/* Footer attribution */}
         <footer className="border-t border-[var(--color-border-subtle)] pt-6 pb-4">
           <p className="text-xs text-[var(--color-text-disabled)] text-center">
             {NASA_ATTRIBUTION} · NASA Space Apps Challenge 2026 · MARS EXPLORER

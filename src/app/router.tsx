@@ -17,7 +17,6 @@ export function AppRouter() {
           <Route path={ROUTES.ATLAS} element={<Atlas />} />
           <Route path={ROUTES.MISSIONS} element={<MissionPlanner />} />
           <Route path={ROUTES.ARCHIVE} element={<Archive />} />
-          {/* Catch-all: redirect unknown routes to home */}
           <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
         </Route>
       </Routes>

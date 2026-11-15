@@ -157,7 +157,6 @@ export function SingleplayerGame({
 
   return (
     <div className="absolute inset-0 pointer-events-none z-30 flex flex-col justify-between p-6 md:p-8 select-none">
-      {/* Top Status Bar */}
       <header className="pointer-events-auto flex items-center justify-between bg-[#10141a]/90 backdrop-blur-xl p-4 rounded-2xl border border-white/15 max-w-4xl mx-auto w-full shadow-2xl">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
@@ -191,11 +190,9 @@ export function SingleplayerGame({
         </button>
       </header>
 
-      {/* Center Clue / Target Card (During Guessing Phase) */}
       {gameState === 'guessing' && currentTarget && (
         <div className="pointer-events-auto max-w-lg mx-auto w-full my-auto animate-in fade-in zoom-in-95 duration-200">
           <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-[#10141a]/95 backdrop-blur-2xl p-6 text-white shadow-2xl shadow-black/90">
-            {/* Header Badge */}
             <div className="flex items-center justify-between mb-3">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#ff6b35]/20 text-[#ff8754] border border-[#ff6b35]/30">
                 <Target className="w-3.5 h-3.5 text-[#ff6b35]" />
@@ -206,12 +203,10 @@ export function SingleplayerGame({
               </span>
             </div>
 
-            {/* Target Title Prompt */}
             <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-2">
               Where is {currentTarget.name}?
             </h2>
 
-            {/* Progressive Clues Box */}
             <div className="my-4 space-y-2.5">
               <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                 <p className="text-[11px] font-mono uppercase text-[#ff8754] mb-1 font-semibold">
@@ -261,7 +256,6 @@ export function SingleplayerGame({
               ) : null}
             </div>
 
-            {/* Instruction & Confirm Action */}
             <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="text-xs text-neutral-300 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#00f5ff]" />
@@ -294,11 +288,9 @@ export function SingleplayerGame({
         </div>
       )}
 
-      {/* Round Revealed Summary Modal */}
       {gameState === 'revealed' && currentRoundResult && (
         <div className="pointer-events-auto max-w-lg mx-auto w-full my-auto animate-in fade-in zoom-in-95 duration-200">
           <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-[#10141a]/95 backdrop-blur-2xl p-6 text-white shadow-2xl shadow-black/90">
-            {/* Top result pill */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -309,7 +301,6 @@ export function SingleplayerGame({
               </span>
             </div>
 
-            {/* Target Details */}
             <h3 className="font-heading text-2xl font-extrabold text-white mb-1">
               {currentRoundResult.targetPoi.name}
             </h3>
@@ -321,7 +312,6 @@ export function SingleplayerGame({
               {currentRoundResult.targetPoi.quickFact}
             </p>
 
-            {/* Distance & Accuracy Metric */}
             <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-5">
               <div>
                 <p className="text-[10px] font-mono uppercase text-neutral-400">Distance Error</p>
@@ -354,11 +344,9 @@ export function SingleplayerGame({
         </div>
       )}
 
-      {/* Game Over Screen */}
       {gameState === 'gameover' && (
         <div className="pointer-events-auto max-w-lg mx-auto w-full my-auto animate-in fade-in zoom-in-95 duration-200">
           <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-[#10141a]/95 backdrop-blur-2xl p-6 text-white shadow-2xl shadow-black/90">
-            {/* Header */}
             <div className="text-center mb-6">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#ff6b35]/20 text-[#ff6b35] mb-3 border border-[#ff6b35]/30">
                 <Trophy className="w-8 h-8" />
@@ -371,7 +359,6 @@ export function SingleplayerGame({
               </p>
             </div>
 
-            {/* Total Score & Rank */}
             {(() => {
               const rank = getExplorerRank(score)
               return (
@@ -388,7 +375,6 @@ export function SingleplayerGame({
               )
             })()}
 
-            {/* Rounds Breakdown Table */}
             <div className="space-y-2 mb-6 max-h-48 overflow-y-auto pr-1">
               {resultsHistory.map((res) => (
                 <div
@@ -407,7 +393,6 @@ export function SingleplayerGame({
               ))}
             </div>
 
-            {/* Action Buttons */}
             <div className="flex items-center gap-3">
               <button
                 onClick={handleRestart}
@@ -430,7 +415,6 @@ export function SingleplayerGame({
         </div>
       )}
 
-      {/* Bottom helper text */}
       <footer className="text-center text-xs text-neutral-400">
         <span className="bg-[#10141a]/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
           Rotate Mars in 360° to locate the landmark

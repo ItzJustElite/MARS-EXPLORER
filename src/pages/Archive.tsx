@@ -40,7 +40,6 @@ export function Archive() {
 
   return (
     <div className="flex h-full overflow-hidden">
-      {/* Filters panel */}
       <aside className="w-56 flex-shrink-0 border-r border-[var(--color-border)] flex flex-col overflow-hidden">
         <div className="px-3 py-3 border-b border-[var(--color-border)]">
           <h2 className="font-heading text-xs font-semibold text-[var(--color-text-primary)]">
@@ -48,7 +47,6 @@ export function Archive() {
           </h2>
         </div>
         <div className="flex-1 overflow-y-auto p-3 space-y-4">
-          {/* Rover filter */}
           <div>
             <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
               Rover
@@ -73,7 +71,6 @@ export function Archive() {
             </div>
           </div>
 
-          {/* NASA Data Sources */}
           <div>
             <p className="text-[9px] font-mono text-[var(--color-text-disabled)] uppercase tracking-wider mb-2">
               NASA Data Sources
@@ -102,9 +99,7 @@ export function Archive() {
         </div>
       </aside>
 
-      {/* Main list area */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        {/* Search bar */}
         <div className="px-4 py-3 border-b border-[var(--color-border)] flex items-center gap-3">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-muted)]" />
@@ -129,7 +124,6 @@ export function Archive() {
           </div>
         </div>
 
-        {/* Results */}
         <div className="flex-1 overflow-y-auto p-4">
           {filtered.length === 0 ? (
             <LoadingState
@@ -150,7 +144,6 @@ export function Archive() {
             </div>
           )}
 
-          {/* Coming soon notice */}
           <div className="mt-6">
             <Panel variant="flat" padding="md">
               <div className="flex items-center gap-3 mb-2">
@@ -170,7 +163,6 @@ export function Archive() {
         </div>
       </div>
 
-      {/* Detail panel */}
       {selected && (
         <aside className="w-64 flex-shrink-0 border-l border-[var(--color-border)] overflow-y-auto">
           <div className="px-4 py-3 border-b border-[var(--color-border)] flex items-center justify-between">

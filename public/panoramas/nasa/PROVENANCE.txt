@@ -1,0 +1,418 @@
+Official NASA 360° imagery used by MARS EXPLORER
+================================================
+
+Surface panoramas are official NASA/JPL rover mosaics resolved through the
+NASA Image and Video Library API (https://images-api.nasa.gov) and cached
+locally as same-origin derivatives. Orbital panoramas are generated from the
+official NASA Mars Trek WMTS global mosaic (Viking MDIM 2.1, ~232 m/px):
+https://trek.nasa.gov/tiles/Mars/EQ/
+
+- jezero-crater [surface] — Perseverance Captures 'Bright Angel' in 360 Degrees
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA26369
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26369
+    asset: https://images-assets.nasa.gov/image/PIA26369/PIA26369~orig.jpg
+- perseverance-first-pan [surface] — Mastcam-Z's First 360-Degree Panorama
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA24264
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24264
+    asset: https://images-assets.nasa.gov/image/PIA24264/PIA24264~orig.jpg
+- perseverance-navcams [surface] — Perseverance Navcams 360-Degree Panorama
+    credit: NASA/JPL-Caltech
+    nasa: PIA24422
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24422
+    asset: https://images-assets.nasa.gov/image/PIA24422/PIA24422~orig.jpg
+- perseverance-van-zyl [surface] — Mastcam-Z's 360-degree View of Van Zyl Overlook
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA24663
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24663
+    asset: https://images-assets.nasa.gov/image/PIA24663/PIA24663~orig.jpg
+- perseverance-jezero-delta [surface] — Detailed Panorama of Mars' Jezero Crater Delta
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA24921
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24921
+    asset: https://images-assets.nasa.gov/image/PIA24921/PIA24921~orig.jpg
+- perseverance-airey-hill [surface] — Perseverance's 360-Degree View From 'Airey Hill'
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA26080
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26080
+    asset: https://images-assets.nasa.gov/image/PIA26080/PIA26080~orig.jpg
+- perseverance-rio-chiquito [surface] — Perseverance Makes Tracks at 'Rio Chiquito'
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA26474
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26474
+    asset: https://images-assets.nasa.gov/image/PIA26474/PIA26474~orig.jpg
+- perseverance-pico-turquino [surface] — Perseverance Views 'Pico Turquino Hills'
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA26473
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26473
+    asset: https://images-assets.nasa.gov/image/PIA26473/PIA26473~orig.jpg
+- perseverance-office [surface] — Perseverance's Office on Mars
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA24765
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24765
+    asset: https://images-assets.nasa.gov/image/PIA24765/PIA24765~orig.jpg
+- perseverance-citadelle [surface] — Malamaire View of Citadelle Area
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA24833
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24833
+    asset: https://images-assets.nasa.gov/image/PIA24833/PIA24833~orig.jpg
+- perseverance-sample-depot [surface] — Perseverance's Panorama of Potential Mars Sample Return Landing Site
+    credit: NASA/JPL-Caltech/ASU/MSSS
+    nasa: PIA25406
+    api: https://images-api.nasa.gov/search?nasa_id=PIA25406
+    asset: https://images-assets.nasa.gov/image/PIA25406/PIA25406~orig.jpg
+- gale-crater [surface] — Curiosity's 360-Degree Panorama of Avanavero Drill Site
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA25407
+    api: https://images-api.nasa.gov/search?nasa_id=PIA25407
+    asset: https://images-assets.nasa.gov/image/PIA25407/PIA25407~orig.jpg
+- curiosity-inside-gale [surface] — Crisp View from Inside Gale Crater
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA16026
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16026
+    asset: https://images-assets.nasa.gov/image/PIA16026/PIA16026~orig.jpg
+- curiosity-all-around [surface] — All Around Curiosity
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA16074
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16074
+    asset: https://images-assets.nasa.gov/image/PIA16074/PIA16074~orig.jpg
+- curiosity-landing-site [surface] — Landing Site Panorama, with the Heights of Mount Sharp
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA16101
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16101
+    asset: https://images-assets.nasa.gov/image/PIA16101/PIA16101~orig.jpg
+- curiosity-dingo-gap [surface] — Full-Circle Vista During Curiosity Approach to Dingo Gap
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA17763
+    api: https://images-api.nasa.gov/search?nasa_id=PIA17763
+    asset: https://images-assets.nasa.gov/image/PIA17763/PIA17763~orig.jpg
+- curiosity-kimberley [surface] — Panorama With Sandstone Outcrop Near The Kimberley Waypoint
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA18069
+    api: https://images-api.nasa.gov/search?nasa_id=PIA18069
+    asset: https://images-assets.nasa.gov/image/PIA18069/PIA18069~orig.jpg
+- curiosity-hidden-valley [surface] — Curiosity 360-Degree View Before Entering Hidden Valley
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA18409
+    api: https://images-api.nasa.gov/search?nasa_id=PIA18409
+    asset: https://images-assets.nasa.gov/image/PIA18409/PIA18409~orig.jpg
+- curiosity-marias-pass [surface] — Full-Circle View Near Marias Pass on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA20266
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20266
+    asset: https://images-assets.nasa.gov/image/PIA20266/PIA20266~orig.jpg
+- curiosity-naukluft [surface] — Full-Circle Vista from Naukluft Plateau on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA20332
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20332
+    asset: https://images-assets.nasa.gov/image/PIA20332/PIA20332~orig.jpg
+- curiosity-namib-dune [surface] — Full-Circle Panorama Beside Namib Dune on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA20284
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20284
+    asset: https://images-assets.nasa.gov/image/PIA20284/PIA20284~orig.jpg
+- curiosity-bagnold [surface] — Full-Circle Vista With a Linear Shaped Martian Sand Dune
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA21268
+    api: https://images-api.nasa.gov/search?nasa_id=PIA21268
+    asset: https://images-assets.nasa.gov/image/PIA21268/PIA21268~orig.jpg
+- curiosity-sol-1000 [surface] — Panorama from Curiosity Sol 1000 Location
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA19679
+    api: https://images-api.nasa.gov/search?nasa_id=PIA19679
+    asset: https://images-assets.nasa.gov/image/PIA19679/PIA19679~orig.jpg
+- curiosity-murray-buttes [surface] — Rover Panorama Taken Amid Murray Buttes on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA20840
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20840
+    asset: https://images-assets.nasa.gov/image/PIA20840/PIA20840~orig.jpg
+- curiosity-murray-entrance [surface] — Rover Panorama of Entrance to Murray Buttes on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA20765
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20765
+    asset: https://images-assets.nasa.gov/image/PIA20765/PIA20765~orig.jpg
+- curiosity-vera-rubin [surface] — Panorama of Vera Rubin Ridge
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA22545
+    api: https://images-api.nasa.gov/search?nasa_id=PIA22545
+    asset: https://images-assets.nasa.gov/image/PIA22545/PIA22545~orig.jpg
+- curiosity-rock-hall [surface] — Curiosity's 360 Panorama of "Rock Hall"
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA23042
+    api: https://images-api.nasa.gov/search?nasa_id=PIA23042
+    asset: https://images-assets.nasa.gov/image/PIA23042/PIA23042~orig.jpg
+- curiosity-teal-ridge [surface] — Curiosity Surveys "Teal Ridge"
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA23346
+    api: https://images-api.nasa.gov/search?nasa_id=PIA23346
+    asset: https://images-assets.nasa.gov/image/PIA23346/PIA23346~orig.jpg
+- curiosity-mont-mercou-approach [surface] — Curiosity's 360-Degree View Approaching Mont Mercou
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA24269
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24269
+    asset: https://images-assets.nasa.gov/image/PIA24269/PIA24269~orig.jpg
+- curiosity-mont-mercou-top [surface] — Curiosity's 360-degree View Atop Mont Mercou
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA24626
+    api: https://images-api.nasa.gov/search?nasa_id=PIA24626
+    asset: https://images-assets.nasa.gov/image/PIA24626/PIA24626~orig.jpg
+- curiosity-paraitepuy [surface] — Curiosity's View of Paraitepuy Pass
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA25413
+    api: https://images-api.nasa.gov/search?nasa_id=PIA25413
+    asset: https://images-assets.nasa.gov/image/PIA25413/PIA25413~orig.jpg
+- curiosity-greenheugh [surface] — Curiosity's 360-Degree Panorama of Gator-Back Rocks on Greenheugh
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA25176
+    api: https://images-api.nasa.gov/search?nasa_id=PIA25176
+    asset: https://images-assets.nasa.gov/image/PIA25176/PIA25176~orig.jpg
+- curiosity-marker-band [surface] — Curiosity's 360-Degree View of Marker Band Valley
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA25732
+    api: https://images-api.nasa.gov/search?nasa_id=PIA25732
+    asset: https://images-assets.nasa.gov/image/PIA25732/PIA25732~orig.jpg
+- curiosity-gediz-arrival [surface] — Curiosity Arrives at Gediz Vallis Channel
+    credit: NASA/JPL-Caltech
+    nasa: PIA26246
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26246
+    asset: https://images-assets.nasa.gov/image/PIA26246/PIA26246~orig.jpg
+- curiosity-sequoia [surface] — Curiosity's Navcams View the Area Around 'Sequoia'
+    credit: NASA/JPL-Caltech
+    nasa: PIA26047
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26047
+    asset: https://images-assets.nasa.gov/image/PIA26047/PIA26047~orig.jpg
+- curiosity-challenging-slope [surface] — Curiosity's View up a Challenging Slope
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA26012
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26012
+    asset: https://images-assets.nasa.gov/image/PIA26012/PIA26012~orig.jpg
+- curiosity-gediz-ridge [surface] — Curiosity Views Gediz Vallis Ridge
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA26019
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26019
+    asset: https://images-assets.nasa.gov/image/PIA26019/PIA26019~orig.jpg
+- curiosity-gediz-channel [surface] — Curiosity Takes a 360-Degree View of Gediz Vallis Channel
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA26363
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26363
+    asset: https://images-assets.nasa.gov/image/PIA26363/PIA26363~orig.jpg
+- curiosity-boxwork [surface] — Curiosity's First 360-Degree View of Boxwork Patterns
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA26559
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26559
+    asset: https://images-assets.nasa.gov/image/PIA26559/PIA26559~orig.jpg
+- curiosity-ubajara [surface] — Curiosity Surveys the 'Ubajara' Sampling Site on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA26554
+    api: https://images-api.nasa.gov/search?nasa_id=PIA26554
+    asset: https://images-assets.nasa.gov/image/PIA26554/PIA26554~orig.jpg
+- curiosity-yellowknife [surface] — View from Inside Yellowknife Bay
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA16701
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16701
+    asset: https://images-assets.nasa.gov/image/PIA16701/PIA16701~orig.jpg
+- curiosity-spaghetti [surface] — Curiosity Captures a Spaghetti Western Landscape on Mars
+    credit: NASA/JPL-Caltech/MSSS
+    nasa: PIA23971
+    api: https://images-api.nasa.gov/search?nasa_id=PIA23971
+    asset: https://images-assets.nasa.gov/image/PIA23971/PIA23971~orig.jpg
+- meridiani-planum [surface] — Opportunity Rub al Khali Panorama
+    credit: NASA/JPL/Cornell
+    nasa: PIA07216
+    api: https://images-api.nasa.gov/search?nasa_id=PIA07216
+    asset: https://images-assets.nasa.gov/image/PIA07216/PIA07216~orig.jpg
+- victoria-crater [surface] — D-Star Panorama by Opportunity
+    credit: NASA/JPL-Caltech/Cornell University
+    nasa: PIA10213
+    api: https://images-api.nasa.gov/search?nasa_id=PIA10213
+    asset: https://images-assets.nasa.gov/image/PIA10213/PIA10213~orig.jpg
+- opportunity-santorini [surface] — Full-Circle Santorini Panorama from Opportunity
+    credit: NASA/JPL/Cornell
+    nasa: PIA11754
+    api: https://images-api.nasa.gov/search?nasa_id=PIA11754
+    asset: https://images-assets.nasa.gov/image/PIA11754/PIA11754~orig.jpg
+- opportunity-whitewater [surface] — Opportunity Surroundings on Sol 3071, on Whitewater Lake Outcrop
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA16556
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16556
+    asset: https://images-assets.nasa.gov/image/PIA16556/PIA16556~orig.jpg
+- opportunity-matijevic [surface] — Opportunity Surroundings on Sol 3105, on Matijevic Hill
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA16558
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16558
+    asset: https://images-assets.nasa.gov/image/PIA16558/PIA16558~orig.jpg
+- opportunity-endeavour-rim [surface] — Opportunity Tracks Near Crater Rim Ridgeline
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA18098
+    api: https://images-api.nasa.gov/search?nasa_id=PIA18098
+    asset: https://images-assets.nasa.gov/image/PIA18098/PIA18098~orig.jpg
+- opportunity-cambridge-bay [surface] — Cambridge Bay Outcrop Examined by Opportunity
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA13372
+    api: https://images-api.nasa.gov/search?nasa_id=PIA13372
+    asset: https://images-assets.nasa.gov/image/PIA13372/PIA13372~orig.jpg
+- opportunity-greeley [surface] — Greeley Panorama from Opportunity Fifth Martian Winter False Color
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA15689
+    api: https://images-api.nasa.gov/search?nasa_id=PIA15689
+    asset: https://images-assets.nasa.gov/image/PIA15689/PIA15689~orig.jpg
+- opportunity-cape-tribulation [surface] — High Viewpoint for 11-Year-Old Rover Mission on Mars
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA19109
+    api: https://images-api.nasa.gov/search?nasa_id=PIA19109
+    asset: https://images-assets.nasa.gov/image/PIA19109/PIA19109~orig.jpg
+- opportunity-marathon-valley [surface] — Mars Rover Opportunity Panorama of Marathon Valley
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA20749
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20749
+    asset: https://images-assets.nasa.gov/image/PIA20749/PIA20749~orig.jpg
+- opportunity-wharton-ridge [surface] — Mars Rover Opportunity Panorama of Wharton Ridge
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA20849
+    api: https://images-api.nasa.gov/search?nasa_id=PIA20849
+    asset: https://images-assets.nasa.gov/image/PIA20849/PIA20849~orig.jpg
+- opportunity-perseverance-valley [surface] — View From Within 'Perseverance Valley' on Mars
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA22074
+    api: https://images-api.nasa.gov/search?nasa_id=PIA22074
+    asset: https://images-assets.nasa.gov/image/PIA22074/PIA22074~orig.jpg
+- opportunity-erebus-rim [surface] — On the Rim of Erebus
+    credit: NASA/JPL/Cornell
+    nasa: PIA03270
+    api: https://images-api.nasa.gov/search?nasa_id=PIA03270
+    asset: https://images-assets.nasa.gov/image/PIA03270/PIA03270~orig.jpg
+- opportunity-olympia [surface] — Opportunity Olympia Panorama
+    credit: NASA/JPL/Cornell
+    nasa: PIA03621
+    api: https://images-api.nasa.gov/search?nasa_id=PIA03621
+    asset: https://images-assets.nasa.gov/image/PIA03621/PIA03621~orig.jpg
+- opportunity-payson [surface] — Payson Panorama by Opportunity
+    credit: NASA/JPL/Cornell
+    nasa: PIA02696
+    api: https://images-api.nasa.gov/search?nasa_id=PIA02696
+    asset: https://images-assets.nasa.gov/image/PIA02696/PIA02696~orig.jpg
+- gusev-crater [surface] — Full-Circle Bonestell Panorama from Spirit
+    credit: NASA/JPL/Cornell University
+    nasa: PIA11746
+    api: https://images-api.nasa.gov/search?nasa_id=PIA11746
+    asset: https://images-assets.nasa.gov/image/PIA11746/PIA11746~orig.jpg
+- spirit-mcmurdo [surface] — Spirit Mars Rover in McMurdo Panorama
+    credit: NASA/JPL-Caltech/Cornell
+    nasa: PIA16440
+    api: https://images-api.nasa.gov/search?nasa_id=PIA16440
+    asset: https://images-assets.nasa.gov/image/PIA16440/PIA16440~orig.jpg
+- spirit-winter-haven [surface] — McMurdo Panorama from Spirit Winter Haven
+    credit: NASA/JPL/Cornell
+    nasa: PIA01907
+    api: https://images-api.nasa.gov/search?nasa_id=PIA01907
+    asset: https://images-assets.nasa.gov/image/PIA01907/PIA01907~orig.jpg
+- spirit-lookout [surface] — Lookout Panorama from Spirit
+    credit: NASA/JPL/Cornell
+    nasa: PIA07882
+    api: https://images-api.nasa.gov/search?nasa_id=PIA07882
+    asset: https://images-assets.nasa.gov/image/PIA07882/PIA07882~orig.jpg
+- spirit-west-valley [surface] — Spirit West Valley Panorama
+    credit: NASA/JPL/Cornell
+    nasa: PIA10216
+    api: https://images-api.nasa.gov/search?nasa_id=PIA10216
+    asset: https://images-assets.nasa.gov/image/PIA10216/PIA10216~orig.jpg
+- ares-vallis [surface] — Improved MPF 360-degree Color Panorama
+    credit: NASA/JPL
+    nasa: PIA01466
+    api: https://images-api.nasa.gov/search?nasa_id=PIA01466
+    asset: https://images-assets.nasa.gov/image/PIA01466/PIA01466~orig.jpg
+- viking-1-first-pan [surface] — First Panoramic View From The Surface Of Mars
+    credit: NASA/JPL
+    nasa: PIA00383
+    api: https://images-api.nasa.gov/search?nasa_id=PIA00383
+    asset: https://images-assets.nasa.gov/image/PIA00383/PIA00383~thumb.jpg
+- phoenix-full-circle [surface] — Full-Circle Color Panorama of Phoenix Landing Site on Northern Mars
+    credit: NASA/JPL-Caltech/University of Arizona
+    nasa: PIA11734
+    api: https://images-api.nasa.gov/search?nasa_id=PIA11734
+    asset: https://images-assets.nasa.gov/image/PIA11734/PIA11734~orig.jpg
+- phoenix-true-color [surface] — Full-Circle Color Panorama of Phoenix Landing Site on Northern Mars
+    credit: NASA/JPL-Caltech/University of Arizona
+    nasa: PIA11007
+    api: https://images-api.nasa.gov/search?nasa_id=PIA11007
+    asset: https://images-assets.nasa.gov/image/PIA11007/PIA11007~orig.jpg
+- phoenix-deck [surface] — Mars Panorama of Phoenix Landing Site and Lander Deck
+    credit: NASA/JPL-Caltech/University of Arizona
+    nasa: PIA13804
+    api: https://images-api.nasa.gov/search?nasa_id=PIA13804
+    asset: https://images-assets.nasa.gov/image/PIA13804/PIA13804~orig.jpg
+- olympus-mons [orbital] — Olympus Mons — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- valles-marineris [orbital] — Valles Marineris — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- planum-boreum [orbital] — Planum Boreum — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- hellas-planitia [orbital] — Hellas Basin — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- tharsis-montes [orbital] — Tharsis Montes — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- utopia-planitia [orbital] — Utopia Planitia — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- planum-australe [orbital] — Planum Australe — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- noctis-labyrinthus [orbital] — Noctis Labyrinthus — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- cydonia [orbital] — Cydonia — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- argyre-planitia [orbital] — Argyre Basin — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- alba-mons [orbital] — Alba Mons — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- medusae-fossae [orbital] — Medusae Fossae — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- kasei-valles [orbital] — Kasei Valles — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+- elysium-planitia [orbital] — Elysium Planitia — Orbital Reconnaissance
+    credit: NASA/JPL-Caltech/USGS · Mars Trek Viking MDIM 2.1
+    nasa: Mars Trek
+    api: https://trek.nasa.gov/tiles/Mars/EQ
+    asset: https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/4/{row}/{col}.jpg
+
+Singleplayer guessing rounds use ONLY the ground-level rover/lander mosaics
+above. Orbital reconnaissance panoramas are used exclusively by the globe
+exploration view and are never served as guessing rounds.

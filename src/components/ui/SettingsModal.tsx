@@ -27,7 +27,6 @@ export function SettingsModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-md select-none animate-in fade-in duration-150">
       <div className="relative w-full max-w-lg rounded-3xl border border-white/20 bg-[#10141a]/95 backdrop-blur-2xl p-8 md:p-10 text-white shadow-2xl shadow-black/90 space-y-7">
-        {/* Header */}
         <div className="flex items-center justify-between pb-5 border-b border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35]">
@@ -49,9 +48,7 @@ export function SettingsModal({
           </button>
         </div>
 
-        {/* Settings List with generous padding */}
         <div className="space-y-5">
-          {/* Audio Toggle */}
           <div className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10">
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-[#ff6b35]">
@@ -80,7 +77,6 @@ export function SettingsModal({
             </button>
           </div>
 
-          {/* Idle Auto-Rotation */}
           <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3.5">
@@ -129,7 +125,6 @@ export function SettingsModal({
             )}
           </div>
 
-          {/* Controls Guide */}
           <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
             <div className="flex items-center gap-2 text-neutral-200 text-sm font-semibold">
               <HelpCircle className="w-4 h-4 text-cyan-400" />
@@ -143,7 +138,6 @@ export function SettingsModal({
           </div>
         </div>
 
-        {/* Done Button */}
         <div className="pt-2">
           <button
             onClick={() => {
