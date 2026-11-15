@@ -3,19 +3,20 @@ import { Layers, Search, ZoomIn, ZoomOut, Eye, EyeOff } from 'lucide-react'
 import { MARS_POIS } from '@/data/marsPois'
 import { SURFACE_REGIONS } from '@/data/mapRegions'
 import { poiCategoryColor } from '@/components/ui/PoiCategoryIcon'
+import { publicAssetUrl } from '@/lib/publicAssets'
 
 function MapImagery({ mapLayer }: { mapLayer: 'viking' | 'mola' }) {
   return (
     <div className="absolute inset-0 flex pointer-events-none">
       {mapLayer === 'viking' ? (
         <>
-          <img src="/models/mars/textures/trek_west.jpg" alt="" className="w-1/2 h-full object-fill opacity-90" />
-          <img src="/models/mars/textures/trek_east.jpg" alt="" className="w-1/2 h-full object-fill opacity-90" />
+          <img src={publicAssetUrl('/models/mars/textures/trek_west.jpg')} alt="" className="w-1/2 h-full object-fill opacity-90" />
+          <img src={publicAssetUrl('/models/mars/textures/trek_east.jpg')} alt="" className="w-1/2 h-full object-fill opacity-90" />
         </>
       ) : (
         <>
-          <img src="/models/mars/textures/mola_west.jpg" alt="" className="w-1/2 h-full object-fill opacity-90" />
-          <img src="/models/mars/textures/mola_east.jpg" alt="" className="w-1/2 h-full object-fill opacity-90" />
+          <img src={publicAssetUrl('/models/mars/textures/mola_west.jpg')} alt="" className="w-1/2 h-full object-fill opacity-90" />
+          <img src={publicAssetUrl('/models/mars/textures/mola_east.jpg')} alt="" className="w-1/2 h-full object-fill opacity-90" />
         </>
       )}
     </div>

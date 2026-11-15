@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { MARS_POIS, type MarsPOI } from '@/data/marsPois'
 import { poiCategoryColor } from '@/components/ui/PoiCategoryIcon'
+import { publicAssetUrl } from '@/lib/publicAssets'
 
 interface MarsCanvasProps {
   selectedPoi: MarsPOI | null
@@ -263,7 +264,7 @@ export function MarsCanvas({
     // 9. Load the high-res 3D Mars GLTF model from public/models/mars/scene.gltf
     const loader = new GLTFLoader()
     loader.load(
-      '/models/mars/scene.gltf',
+      publicAssetUrl('/models/mars/scene.gltf'),
       (gltf) => {
         // Remove fallback sphere
         marsGroup.remove(fallbackMarsMesh)

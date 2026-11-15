@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Compass, Eye, Play } from 'lucide-react'
 import { MARS_POIS, type MarsPOI } from '@/data/marsPois'
 import { getNasaPanorama, getNasaCardImage } from '@/data/nasaPanoramas'
 import { PoiCategoryIcon } from '@/components/ui/PoiCategoryIcon'
+import { publicAssetUrl } from '@/lib/publicAssets'
 import { sound } from '@/lib/audio'
 
 interface QuickFactCardProps {
@@ -22,7 +23,7 @@ export function QuickFactCard({
   const totalCount = MARS_POIS.length
   const source = getNasaPanorama(poi.id)
   const cardImage = getNasaCardImage(poi.id)
-  const heroSrc = cardImage?.src ?? source?.thumb ?? poi.panoramaUrl
+  const heroSrc = cardImage?.src ?? source?.thumb ?? publicAssetUrl(poi.panoramaUrl)
   const heroAlt = cardImage?.title ?? source?.title ?? poi.name
   const heroCredit = cardImage?.credit ?? source?.credit
   const heroNasaId = cardImage?.nasaId ?? source?.nasaId

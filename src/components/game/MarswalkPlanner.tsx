@@ -9,6 +9,7 @@ import {
 import { MarsFlatMap } from '@/components/game/MarsFlatMap'
 import { MARS_POIS, type MarsPOI } from '@/data/marsPois'
 import { marsGreatCircleKm } from '@/lib/marsCoordinates'
+import { publicAssetUrl } from '@/lib/publicAssets'
 import { sound } from '@/lib/audio'
 
 interface MarswalkPlannerProps {
@@ -109,8 +110,8 @@ export function MarswalkPlanner({ onExit }: MarswalkPlannerProps) {
     }
     imgW.onload = () => { loaded++; onDone() }
     imgE.onload = () => { loaded++; onDone() }
-    imgW.src = '/models/mars/textures/mola_west.jpg'
-    imgE.src = '/models/mars/textures/mola_east.jpg'
+    imgW.src = publicAssetUrl('/models/mars/textures/mola_west.jpg')
+    imgE.src = publicAssetUrl('/models/mars/textures/mola_east.jpg')
     return () => { cancelled = true }
   }, [])
 

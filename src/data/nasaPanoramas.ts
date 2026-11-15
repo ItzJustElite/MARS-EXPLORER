@@ -14,15 +14,34 @@
  * Run `node scripts/build-nasa-panoramas.mjs` to (re)generate the manifest.
  */
 import {
-  NASA_PANORAMAS,
+  NASA_PANORAMAS as GENERATED_NASA_PANORAMAS,
   NASA_PANORAMAS_GENERATED_AT,
-  NASA_CARD_IMAGES,
+  NASA_CARD_IMAGES as GENERATED_NASA_CARD_IMAGES,
   type NasaPanoramaKind,
   type NasaPanoramaSource,
   type NasaCardImageSource,
 } from './nasaPanoramas.generated'
+import { publicAssetUrl } from '@/lib/publicAssets'
 
-export { NASA_PANORAMAS, NASA_PANORAMAS_GENERATED_AT, NASA_CARD_IMAGES }
+export const NASA_PANORAMAS = Object.fromEntries(
+  Object.entries(GENERATED_NASA_PANORAMAS).map(([id, source]) => [
+    id,
+    {
+      ...source,
+      src: publicAssetUrl(source.src),
+      thumb: publicAssetUrl(source.thumb),
+    },
+  ]),
+) as typeof GENERATED_NASA_PANORAMAS
+
+export const NASA_CARD_IMAGES = Object.fromEntries(
+  Object.entries(GENERATED_NASA_CARD_IMAGES).map(([id, source]) => [
+    id,
+    { ...source, src: publicAssetUrl(source.src) },
+  ]),
+) as typeof GENERATED_NASA_CARD_IMAGES
+
+export { NASA_PANORAMAS_GENERATED_AT }
 export type { NasaPanoramaKind, NasaPanoramaSource, NasaCardImageSource }
 
 /** A single ground-level guessing round. */
